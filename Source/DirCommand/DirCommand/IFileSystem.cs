@@ -2,6 +2,6 @@
 {
    public interface IFileSystem
    {
-      void GetFiles();
+      string[] GetFiles();
    }
 }

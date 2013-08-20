@@ -1,5 +1,0 @@
-C:\Dev\DirCommand\Source\DirCommand\DirCommand\bin\Debug\DirCommand.exe.config
-C:\Dev\DirCommand\Source\DirCommand\DirCommand\bin\Debug\DirCommand.exe
-C:\Dev\DirCommand\Source\DirCommand\DirCommand\bin\Debug\DirCommand.pdb
-C:\Dev\DirCommand\Source\DirCommand\DirCommand\obj\Debug\DirCommand.exe
-C:\Dev\DirCommand\Source\DirCommand\DirCommand\obj\Debug\DirCommand.pdb

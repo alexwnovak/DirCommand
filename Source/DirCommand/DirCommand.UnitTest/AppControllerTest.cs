@@ -6,8 +6,11 @@ namespace DirCommand.UnitTest
    public class AppControllerTest
    {
       [TestMethod]
-      public void Run_()
+      public void Run_ArgumentsIsNull_DisplaysSyntax()
       {
+         var appController = new AppController();
+
+         appController.Run( null );
       }
    }
 }

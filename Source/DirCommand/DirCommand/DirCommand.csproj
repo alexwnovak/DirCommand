@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AppController.cs" />
     <Compile Include="Dependency.cs" />
+    <Compile Include="IOutputGuy.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

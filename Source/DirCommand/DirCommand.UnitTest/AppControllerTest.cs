@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 
 namespace DirCommand.UnitTest
 {
@@ -13,41 +12,8 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
-      public void Run_ArgumentsIsNull_DisplaysSyntax()
+      public void Run_ArgumentsIsNull_()
       {
-         // Setup
-
-         var outputGuyMock = new Mock<IOutputGuy>();
-         Dependency.RegisterInstance( outputGuyMock.Object );
-
-         // Test
-
-         var appController = new AppController();
-
-         appController.Run( null );
-
-         // Verify
-
-         outputGuyMock.Verify( ogm => ogm.Syntax(), Times.Once() );
-      }
-
-      [TestMethod]
-      public void Run_ArgumentsArrayIsEmpty_DisplaysSyntax()
-      {
-         // Setup
-
-         var outputGuyMock = new Mock<IOutputGuy>();
-         Dependency.RegisterInstance( outputGuyMock.Object );
-
-         // Test
-
-         var appController = new AppController();
-
-         appController.Run( new string[0] );
-
-         // Verify
-
-         outputGuyMock.Verify( ogm => ogm.Syntax(), Times.Once() );
       }
    }
 }

@@ -40,11 +40,15 @@ namespace DirCommand.IntegrationTest
          return index;
       }
 
-      public static void CreateDirectory( string tempDirectory, string directoryName )
+      public static string CreateSubDirectory( string tempDirectory )
       {
+         string directoryName = "TempDirectory_" + Guid.NewGuid();
+
          string fullPath = Path.Combine( tempDirectory, directoryName );
 
          Directory.CreateDirectory( fullPath );
+
+         return directoryName;
       }
 
       public static void DeleteTempDirectory()

@@ -45,5 +45,25 @@ namespace DirCommand.IntegrationTest
          Assert.AreEqual( 1, files.Count() );
          Assert.AreEqual( fileName, files.First() );
       }
+
+      [TestMethod]
+      public void GetFiles_DirectoryHasOneFileAndOneSubDirectory_ReturnsAll()
+      {
+         // Setup
+
+         string tempDirectory = IntegrationHelper.CreateTempDirectory();
+         string subDirectory = IntegrationHelper.CreateSubDirectory( tempDirectory );
+         string fileName = IntegrationHelper.CreateTempFile( tempDirectory );
+
+         // Test
+
+         var fileSystem = new FileSystem();
+
+         var files = fileSystem.GetFiles( tempDirectory );
+
+         Assert.AreEqual( 2, files.Count() );
+         Assert.AreEqual( subDirectory, files.First() );
+         Assert.AreEqual( fileName, files.ElementAt( 1 ) );
+      }
    }
 }

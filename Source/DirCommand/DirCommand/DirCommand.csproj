@@ -63,8 +63,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>echo C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NonInteractive -File $(SolutionDir)PostBuild.ps1" -SourcePath "$(TargetDir)" -OutDir "$(SolutionDir)Out\"
-C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NonInteractive -File $(SolutionDir)PostBuild.ps1"</PostBuildEvent>
+    <PostBuildEvent>echo C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NonInteractive -File $(SolutionDir)PostBuild.ps1" -SourcePath "$(TargetDir)" -OutDir "$(SolutionDir)Out\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

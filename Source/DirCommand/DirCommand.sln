@@ -5,6 +5,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirCommand", "DirCommand\Di
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirCommand.UnitTest", "DirCommand.UnitTest\DirCommand.UnitTest.csproj", "{700E44F5-A7D4-4CD9-8669-B7F89424EF08}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5CF08D79-960C-44CF-B6DF-986949FE2EB8}"
+	ProjectSection(SolutionItems) = preProject
+		ILMerge.exe = ILMerge.exe
+		PostBuild.ps1 = PostBuild.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

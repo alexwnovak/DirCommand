@@ -63,5 +63,16 @@ namespace DirCommand.IntegrationTest
             // a "no op," since we got what we want: the directory is gone
          }
       }
+
+      public static string CreateTempFile( string tempDirectory )
+      {
+         string fileName = "TempFile_" + Guid.NewGuid();
+
+         string fullPath = Path.Combine( tempDirectory, fileName );
+
+         File.Create( fullPath ).Close();
+
+         return fileName;
+      }
    }
 }

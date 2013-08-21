@@ -53,7 +53,15 @@ namespace DirCommand.IntegrationTest
 
          string testDirectory = Path.Combine( tempPath, _testDirectoryName );
 
-         Directory.Delete( testDirectory, true );
+         try
+         {
+            Directory.Delete( testDirectory, true );
+         }
+         catch ( DirectoryNotFoundException )
+         {
+            // It's OK to eat this exception. Attempting to delete an already-deleted item counts as
+            // a "no op," since we got what we want: the directory is gone
+         }
       }
    }
 }

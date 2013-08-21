@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DirCommand.IntegrationTest
 {
@@ -14,7 +12,7 @@ namespace DirCommand.IntegrationTest
       }
 
       [TestMethod]
-      public void GetFiles_()
+      public void GetFiles_DirectoryIsEmpty_ReturnsZeroFiles()
       {
          // Setup
 
@@ -26,6 +24,7 @@ namespace DirCommand.IntegrationTest
 
          var files = fileSystem.GetFiles( tempDirectory );
 
+         Assert.AreEqual( 0, files.Length );
       }
    }
 }

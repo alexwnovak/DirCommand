@@ -4,9 +4,9 @@ namespace DirCommand
 {
    public class FileSystem : IFileSystem
    {
-      public string[] GetFiles()
+      public string[] GetFiles( string path )
       {
-         return Directory.GetFiles( "." );
+         return Directory.GetFiles( path );
       }
    }
 }

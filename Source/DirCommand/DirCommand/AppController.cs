@@ -6,7 +6,7 @@
       {
          var fileSystem = Dependency.Resolve<IFileSystem>();
 
-         var files = fileSystem.GetFiles();
+         var files = fileSystem.GetFiles( "." );
 
          var consoleAdapter = Dependency.Resolve<IConsoleAdapter>();
 

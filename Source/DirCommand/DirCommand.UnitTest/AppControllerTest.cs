@@ -24,7 +24,7 @@ namespace DirCommand.UnitTest
          // Setup
 
          var fileSystemMock = new Mock<IFileSystem>();
-         fileSystemMock.Setup( fsm => fsm.GetFiles() ).Returns( files );
+         fileSystemMock.Setup( fsm => fsm.GetFiles( It.IsAny<string>() ) ).Returns( files );
          Dependency.RegisterInstance( fileSystemMock.Object );
 
          var consoleAdapterMock = new Mock<IConsoleAdapter>();
@@ -38,7 +38,7 @@ namespace DirCommand.UnitTest
 
          // Verify
 
-         fileSystemMock.Verify( fsm => fsm.GetFiles(), Times.Once() );
+         fileSystemMock.Verify( fsm => fsm.GetFiles( It.IsAny<string>() ), Times.Once() );
          consoleAdapterMock.Verify( cam => cam.WriteLine( files[0] ), Times.Once() );
          consoleAdapterMock.Verify( cam => cam.WriteLine( files[1] ), Times.Once() );
       }

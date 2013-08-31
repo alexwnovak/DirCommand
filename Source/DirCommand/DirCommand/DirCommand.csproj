@@ -51,6 +51,7 @@
     <Compile Include="AppController.cs" />
     <Compile Include="ConsoleAdapter.cs" />
     <Compile Include="Dependency.cs" />
+    <Compile Include="DisplayController.cs" />
     <Compile Include="FileSystem.cs" />
     <Compile Include="IConsoleAdapter.cs" />
     <Compile Include="IFileSystem.cs" />

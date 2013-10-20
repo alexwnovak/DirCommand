@@ -14,5 +14,15 @@ namespace DirCommand.UnitTest
 
          Assert.AreEqual( RunSettings.DefaultPath, runSettings.Path );
       }
+
+      [TestMethod]
+      public void Parse_EmptyArguments_UsesDefaultPath()
+      {
+         var argumentParser = new ArgumentParser();
+
+         var runSettings = argumentParser.Parse( new string[0] );
+
+         Assert.AreEqual( RunSettings.DefaultPath, runSettings.Path );
+      }
    }
 }

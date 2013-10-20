@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DirCommand
+﻿namespace DirCommand
 {
-   public class DisplayController
+   public class DisplayController : IDisplayController
    {
+      public void Display( string[] files )
+      {
+         
+      }
    }
 }

@@ -54,6 +54,7 @@
     <Compile Include="DisplayController.cs" />
     <Compile Include="FileSystem.cs" />
     <Compile Include="IConsoleAdapter.cs" />
+    <Compile Include="IDisplayController.cs" />
     <Compile Include="IFileSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -30,7 +30,7 @@ namespace DirCommand.UnitTest
 
          var appController = new AppController();
 
-         appController.Run( null );
+         appController.Run( new string[1] );
 
          // Verify
 

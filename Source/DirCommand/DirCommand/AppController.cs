@@ -6,7 +6,7 @@
       {
          var displayController = Dependency.Resolve<IDisplayController>();
 
-         if ( arguments == null )
+         if ( arguments == null || arguments.Length == 0 )
          {
             displayController.ShowSyntax();
             return;

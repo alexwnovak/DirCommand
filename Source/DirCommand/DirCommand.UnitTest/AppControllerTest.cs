@@ -81,5 +81,28 @@ namespace DirCommand.UnitTest
 
          fileSystemMock.Verify( fs => fs.GetFiles( It.IsAny<string>() ), Times.Never() );
       }
+
+      [TestMethod]
+      public void Run_EmptyArgumentList_ShowsSyntaxAndExits()
+      {
+         // Setup
+
+         var fileSystemMock = new Mock<IFileSystem>();
+         Dependency.RegisterInstance( fileSystemMock.Object );
+
+         var displayControllerMock = new Mock<IDisplayController>();
+         Dependency.RegisterInstance( displayControllerMock.Object );
+
+         // Test
+
+         var appController = new AppController();
+
+         appController.Run( new string[0] );
+
+         // Verify
+
+         displayControllerMock.Verify( dc => dc.ShowSyntax(), Times.Once() );
+         fileSystemMock.Verify( fs => fs.GetFiles( It.IsAny<string>() ), Times.Never() );
+      }
    }
 }

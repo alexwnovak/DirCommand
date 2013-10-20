@@ -13,13 +13,9 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
-      public void Run_ArgumentsIsNull_FilesAreReadAndSentToTheConsole()
+      public void Run_ArgumentsIsNull_FilesAreReadAndSentToTheDisplayController()
       {
-         var files = new[]
-         {
-            "FileOne.txt",
-            "FileTwo.txt"
-         };
+         var files = new string[0];
 
          // Setup
 
@@ -27,8 +23,8 @@ namespace DirCommand.UnitTest
          fileSystemMock.Setup( fsm => fsm.GetFiles( It.IsAny<string>() ) ).Returns( files );
          Dependency.RegisterInstance( fileSystemMock.Object );
 
-         var consoleAdapterMock = new Mock<IConsoleAdapter>();
-         Dependency.RegisterInstance( consoleAdapterMock.Object );
+         var displayControllerMock = new Mock<IDisplayController>();
+         Dependency.RegisterInstance( displayControllerMock.Object );
 
          // Test
 
@@ -39,8 +35,7 @@ namespace DirCommand.UnitTest
          // Verify
 
          fileSystemMock.Verify( fsm => fsm.GetFiles( It.IsAny<string>() ), Times.Once() );
-         consoleAdapterMock.Verify( cam => cam.WriteLine( files[0] ), Times.Once() );
-         consoleAdapterMock.Verify( cam => cam.WriteLine( files[1] ), Times.Once() );
+         displayControllerMock.Verify( cam => cam.Display( files ), Times.Once() );
       }
    }
 }

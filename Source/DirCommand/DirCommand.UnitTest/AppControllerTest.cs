@@ -62,5 +62,33 @@ namespace DirCommand.UnitTest
 
          argumentParserMock.Verify( ap => ap.Parse( null ), Times.Once() );
       }
+
+      [TestMethod]
+      public void Run_HasArguments_ArgumentsAreSentToParser()
+      {
+         var arguments = new string[1];
+
+         // Setup
+
+         var fileSystemMock = new Mock<IFileSystem>();
+         Dependency.RegisterInstance( fileSystemMock.Object );
+
+         var displayControllerMock = new Mock<IDisplayController>();
+         Dependency.RegisterInstance( displayControllerMock.Object );
+
+         var argumentParserMock = new Mock<IArgumentParser>();
+         Dependency.RegisterInstance( argumentParserMock.Object );
+
+         // Test
+
+         var appController = new AppController();
+
+         appController.Run( arguments );
+
+         // Verify
+
+         argumentParserMock.Verify( ap => ap.Parse( arguments ), Times.Once() );
+         
+      }
    }
 }

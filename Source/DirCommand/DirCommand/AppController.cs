@@ -8,7 +8,7 @@
 
          var argumentParser = Dependency.Resolve<IArgumentParser>();
 
-         argumentParser.Parse( null );
+         argumentParser.Parse( arguments );
 
          // Read files
 

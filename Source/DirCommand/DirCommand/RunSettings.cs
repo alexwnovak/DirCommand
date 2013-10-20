@@ -2,5 +2,17 @@
 {
    public class RunSettings
    {
+      public static string DefaultPath = ".";
+
+      public string Path
+      {
+         get;
+         internal set;
+      }
+
+      public RunSettings()
+      {
+         Path = DefaultPath;
+      }
    }
 }

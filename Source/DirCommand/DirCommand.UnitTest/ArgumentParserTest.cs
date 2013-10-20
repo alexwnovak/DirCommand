@@ -6,9 +6,13 @@ namespace DirCommand.UnitTest
    public class ArgumentParserTest
    {
       [TestMethod]
-      public void Foo()
+      public void Parse_NullArguments_UsesDefaultPath()
       {
          var argumentParser = new ArgumentParser();
+
+         var runSettings = argumentParser.Parse( null );
+
+         Assert.AreEqual( RunSettings.DefaultPath, runSettings.Path );
       }
    }
 }

@@ -1,12 +1,12 @@
-﻿using System;
-
-namespace DirCommand
+﻿namespace DirCommand
 {
    public class ArgumentParser : IArgumentParser
    {
       public RunSettings Parse( string[] arguments )
       {
-         throw new NotImplementedException();
+         var runSettings = new RunSettings();
+
+         return runSettings;
       }
    }
 }

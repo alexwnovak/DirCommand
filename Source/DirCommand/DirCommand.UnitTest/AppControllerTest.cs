@@ -37,5 +37,30 @@ namespace DirCommand.UnitTest
          fileSystemMock.Verify( fsm => fsm.GetFiles( It.IsAny<string>() ), Times.Once() );
          displayControllerMock.Verify( cam => cam.Display( files ), Times.Once() );
       }
+
+      [TestMethod]
+      public void Run_ArgumentsAreNull_NullArgumentsAreSentToParser()
+      {
+         // Setup
+
+         var fileSystemMock = new Mock<IFileSystem>();
+         Dependency.RegisterInstance( fileSystemMock.Object );
+
+         var displayControllerMock = new Mock<IDisplayController>();
+         Dependency.RegisterInstance( displayControllerMock.Object );
+
+         var argumentParserMock = new Mock<IArgumentParser>();
+         Dependency.RegisterInstance( argumentParserMock.Object );
+
+         // Test
+
+         var appController = new AppController();
+
+         appController.Run( null );
+
+         // Verify
+
+         argumentParserMock.Verify( ap => ap.Parse( null ), Times.Once() );
+      }
    }
 }

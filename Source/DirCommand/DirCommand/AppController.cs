@@ -4,9 +4,19 @@
    {
       public void Run( string[] arguments )
       {
+         // Parse the arguments
+
+         var argumentParser = Dependency.Resolve<IArgumentParser>();
+
+         argumentParser.Parse( null );
+
+         // Read files
+
          var fileSystem = Dependency.Resolve<IFileSystem>();
 
          var files = fileSystem.GetFiles( "." );
+
+         // Display
 
          var displayController = Dependency.Resolve<IDisplayController>();
 

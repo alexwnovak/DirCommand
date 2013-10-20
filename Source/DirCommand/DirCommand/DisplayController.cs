@@ -4,7 +4,11 @@
    {
       public void Display( string[] files )
       {
-         
+      }
+
+      public void ShowSyntax()
+      {
+         throw new System.NotImplementedException();
       }
    }
 }

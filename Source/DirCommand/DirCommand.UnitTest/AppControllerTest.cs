@@ -37,5 +37,49 @@ namespace DirCommand.UnitTest
          fileSystemMock.Verify( fsm => fsm.GetFiles( It.IsAny<string>() ), Times.Once() );
          displayControllerMock.Verify( cam => cam.Display( files ), Times.Once() );
       }
+
+      [TestMethod]
+      public void Run_HasNoArguments_DisplaysSyntaxAndExits()
+      {
+         // Setup
+
+         var fileSystemMock = new Mock<IFileSystem>();
+         Dependency.RegisterInstance( fileSystemMock.Object );
+
+         var displayControllerMock = new Mock<IDisplayController>();
+         Dependency.RegisterInstance( displayControllerMock.Object );
+
+         // Test
+
+         var appController = new AppController();
+
+         appController.Run( null );
+
+         // Verify
+
+         displayControllerMock.Verify( dc => dc.ShowSyntax(), Times.Once() );
+      }
+
+      [TestMethod]
+      public void Run_HasNoArguments_DoesNotReadFromFileSystem()
+      {
+         // Setup
+
+         var fileSystemMock = new Mock<IFileSystem>();
+         Dependency.RegisterInstance( fileSystemMock.Object );
+
+         var displayControllerMock = new Mock<IDisplayController>();
+         Dependency.RegisterInstance( displayControllerMock.Object );
+
+         // Test
+
+         var appController = new AppController();
+
+         appController.Run( null );
+
+         // Verify
+
+         fileSystemMock.Verify( fs => fs.GetFiles( It.IsAny<string>() ), Times.Never() );
+      }
    }
 }

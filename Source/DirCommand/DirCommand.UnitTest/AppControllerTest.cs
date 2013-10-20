@@ -26,6 +26,9 @@ namespace DirCommand.UnitTest
          var displayControllerMock = new Mock<IDisplayController>();
          Dependency.RegisterInstance( displayControllerMock.Object );
 
+         var argumentParserMock = new Mock<IArgumentParser>();
+         Dependency.RegisterInstance( argumentParserMock.Object );
+
          // Test
 
          var appController = new AppController();
@@ -88,7 +91,6 @@ namespace DirCommand.UnitTest
          // Verify
 
          argumentParserMock.Verify( ap => ap.Parse( arguments ), Times.Once() );
-         
       }
    }
 }

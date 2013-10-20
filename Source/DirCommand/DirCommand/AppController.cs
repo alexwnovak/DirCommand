@@ -4,17 +4,11 @@
    {
       public void Run( string[] arguments )
       {
-         var displayController = Dependency.Resolve<IDisplayController>();
-
-         if ( arguments == null || arguments.Length == 0 )
-         {
-            displayController.ShowSyntax();
-            return;
-         }
-
          var fileSystem = Dependency.Resolve<IFileSystem>();
 
          var files = fileSystem.GetFiles( "." );
+
+         var displayController = Dependency.Resolve<IDisplayController>();
 
          displayController.Display( files );
       }

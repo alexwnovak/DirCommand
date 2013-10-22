@@ -13,7 +13,14 @@
 
          foreach ( string argument in arguments )
          {
-            runSettings.Path = argument;
+            if ( argument == "/r" )
+            {
+               runSettings.RecurseSubdirectories = true;
+            }
+            else
+            {
+               runSettings.Path = argument;               
+            }
          }
 
          return runSettings;

@@ -10,6 +10,12 @@
          internal set;
       }
 
+      public bool RecurseSubdirectories
+      {
+         get;
+         internal set;
+      }
+
       public RunSettings()
       {
          Path = DefaultPath;

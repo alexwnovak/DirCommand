@@ -55,5 +55,35 @@ namespace DirCommand.UnitTest
 
          Assert.AreEqual( runSettings.Path, arguments[1] );
       }
+
+      [TestMethod]
+      public void Parse_PassesRecursionFlag_EnablesRecursion()
+      {
+         var arguments = new[]
+         {
+            "/r"
+         };
+
+         var argumentParser = new ArgumentParser();
+
+         var runSettings = argumentParser.Parse( arguments );
+
+         Assert.IsTrue( runSettings.RecurseSubdirectories );
+      }
+
+      [TestMethod]
+      public void Parse_PassesNonPathArgument_PathIsNotChanged()
+      {
+         var arguments = new[]
+         {
+            "/r"
+         };
+
+         var argumentParser = new ArgumentParser();
+
+         var runSettings = argumentParser.Parse( arguments );
+
+         Assert.AreEqual( RunSettings.DefaultPath, runSettings.Path );
+      }
    }
 }

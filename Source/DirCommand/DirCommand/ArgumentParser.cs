@@ -11,7 +11,10 @@
 
          var runSettings = new RunSettings();
 
-         runSettings.Path = arguments[0];
+         foreach ( string argument in arguments )
+         {
+            runSettings.Path = argument;
+         }
 
          return runSettings;
       }

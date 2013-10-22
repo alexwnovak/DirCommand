@@ -39,5 +39,21 @@ namespace DirCommand.UnitTest
 
          Assert.AreEqual( runSettings.Path, arguments[0] );
       }
+
+      [TestMethod]
+      public void Parse_PassesTwoStringArgumentsAsPath_UsesTheSecondAsPath()
+      {
+         var arguments = new[]
+         {
+            "FirstArgument",
+            "SecondArgument"
+         };
+
+         var argumentParser = new ArgumentParser();
+
+         var runSettings = argumentParser.Parse( arguments );
+
+         Assert.AreEqual( runSettings.Path, arguments[1] );
+      }
    }
 }

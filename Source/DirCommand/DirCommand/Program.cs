@@ -8,6 +8,7 @@
          Dependency.RegisterType<IFileSystem, FileSystem>();
          Dependency.RegisterType<IConsoleAdapter, ConsoleAdapter>();
          Dependency.RegisterType<IArgumentParser, ArgumentParser>();
+         Dependency.RegisterType<IDisplayController, DisplayController>();
       }
 
       private static int Main( string[] arguments )

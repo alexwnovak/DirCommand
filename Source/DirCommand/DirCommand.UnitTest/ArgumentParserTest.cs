@@ -24,5 +24,20 @@ namespace DirCommand.UnitTest
 
          Assert.AreEqual( RunSettings.DefaultPath, runSettings.Path );
       }
+
+      [TestMethod]
+      public void Parse_PassesStringArgumentForPath_UsesSpecificPath()
+      {
+         var arguments = new[]
+         {
+            "SomeDirectory"
+         };
+
+         var argumentParser = new ArgumentParser();
+
+         var runSettings = argumentParser.Parse( arguments );
+
+         Assert.AreEqual( runSettings.Path, arguments[0] );
+      }
    }
 }

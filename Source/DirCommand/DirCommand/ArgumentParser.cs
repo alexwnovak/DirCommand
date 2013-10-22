@@ -6,6 +6,8 @@
       {
          var runSettings = new RunSettings();
 
+         runSettings.Path = arguments[0];
+
          return runSettings;
       }
    }

@@ -4,7 +4,7 @@ namespace DirCommand
 {
    public class AppController
    {
-      public void Run( string[] arguments )
+      public int Run( string[] arguments )
       {
          // Parse the arguments
 
@@ -17,7 +17,7 @@ namespace DirCommand
          catch ( ArgumentException ex )
          {
             Dependency.Resolve<IDisplayController>().ShowError( ex.Message );
-            return;
+            return 1;
          }
 
          // Read files
@@ -31,6 +31,8 @@ namespace DirCommand
          var displayController = Dependency.Resolve<IDisplayController>();
 
          displayController.Display( files );
+
+         return 0;
       }
    }
 }

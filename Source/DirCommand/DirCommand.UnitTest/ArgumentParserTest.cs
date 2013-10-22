@@ -100,5 +100,35 @@ namespace DirCommand.UnitTest
 
          argumentParser.Parse( arguments );
       }
+
+      [TestMethod]
+      [ExpectedException( typeof ( ArgumentException ) )]
+      public void Parse_PassesFilePathAndUnrecognizedParameter_ThrowsArgumentException()
+      {
+         var arguments = new[]
+         {
+            "somePath",
+            "/somethingUnrecognized"
+         };
+
+         var argumentParser = new ArgumentParser();
+
+         argumentParser.Parse( arguments );
+      }
+
+      [TestMethod]
+      [ExpectedException( typeof( ArgumentException ) )]
+      public void Parse_PassesFilePathAndUnrecognizedParameterInReverseOrder_ThrowsArgumentException()
+      {
+         var arguments = new[]
+         {
+            "/somethingUnrecognized",
+            "somePath"
+         };
+
+         var argumentParser = new ArgumentParser();
+
+         argumentParser.Parse( arguments );
+      }
    }
 }

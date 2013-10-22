@@ -6,5 +6,10 @@
       {
 
       }
+
+      public void ShowError( string message )
+      {
+         throw new System.NotImplementedException();
+      }
    }
 }

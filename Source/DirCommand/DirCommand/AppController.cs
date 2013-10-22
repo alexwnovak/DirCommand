@@ -1,4 +1,6 @@
-﻿namespace DirCommand
+﻿using System;
+
+namespace DirCommand
 {
    public class AppController
    {
@@ -8,7 +10,15 @@
 
          var argumentParser = Dependency.Resolve<IArgumentParser>();
 
-         argumentParser.Parse( arguments );
+         try
+         {
+            argumentParser.Parse( arguments );
+         }
+         catch ( ArgumentException ex )
+         {
+            Dependency.Resolve<IDisplayController>().ShowError( ex.Message );
+            return;
+         }
 
          // Read files
 

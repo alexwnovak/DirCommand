@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
 namespace DirCommand.UnitTest
@@ -91,6 +92,31 @@ namespace DirCommand.UnitTest
          // Verify
 
          argumentParserMock.Verify( ap => ap.Parse( arguments ), Times.Once() );
+      }
+
+      [TestMethod]
+      public void Run_ArgumentParserEncountersUnrecognizedArgument_DisplaysErrorMessage()
+      {
+         const string errorMessage = "This is the error message";
+
+         // Setup
+
+         var argumentParserMock = new Mock<IArgumentParser>();
+         argumentParserMock.Setup( ap => ap.Parse( It.IsAny<string[]>() ) ).Throws( new ArgumentException( errorMessage ) );
+         Dependency.RegisterInstance( argumentParserMock.Object );
+
+         var displayControllerMock = new Mock<IDisplayController>();
+         Dependency.RegisterInstance( displayControllerMock.Object );
+
+         // Test
+
+         var appController = new AppController();
+
+         appController.Run( null );
+
+         // Assert
+
+         displayControllerMock.Verify( dc => dc.ShowError( errorMessage ), Times.Once() );
       }
    }
 }

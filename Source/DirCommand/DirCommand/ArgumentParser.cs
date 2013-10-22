@@ -1,4 +1,6 @@
-﻿namespace DirCommand
+﻿using System;
+
+namespace DirCommand
 {
    public class ArgumentParser : IArgumentParser
    {
@@ -13,9 +15,16 @@
 
          foreach ( string argument in arguments )
          {
-            if ( argument == "/r" )
+            if ( argument.StartsWith( "/" ) )
             {
-               runSettings.RecurseSubdirectories = true;
+               if ( argument == "/r" )
+               {
+                  runSettings.RecurseSubdirectories = true;
+               }
+               else
+               {
+                  throw new ArgumentException( "Unrecognized argument:" + argument );
+               }
             }
             else
             {

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DirCommand.UnitTest
 {
@@ -84,6 +85,20 @@ namespace DirCommand.UnitTest
          var runSettings = argumentParser.Parse( arguments );
 
          Assert.AreEqual( RunSettings.DefaultPath, runSettings.Path );
+      }
+
+      [TestMethod]
+      [ExpectedException( typeof( ArgumentException ) )]
+      public void Parse_PassesUnrecognizedParamer_ThrowsArgumentException()
+      {
+         var arguments = new[]
+         {
+            "/somethingUnrecognized"
+         };
+
+         var argumentParser = new ArgumentParser();
+
+         argumentParser.Parse( arguments );
       }
    }
 }

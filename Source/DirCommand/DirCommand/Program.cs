@@ -10,11 +10,11 @@
          Dependency.RegisterType<IArgumentParser, ArgumentParser>();
       }
 
-      private static void Main( string[] arguments )
+      private static int Main( string[] arguments )
       {
          InitDependencyInjection();
 
-         new AppController().Run( arguments );
+         return new AppController().Run( arguments );
       }
    }
 }

@@ -6,12 +6,12 @@ namespace DirCommand
    {
       public RunSettings Parse( string[] arguments )
       {
+         var runSettings = new RunSettings();
+         
          if ( arguments == null || arguments.Length == 0 )
          {
-            return new RunSettings();
+            return runSettings;
          }
-
-         var runSettings = new RunSettings();
 
          foreach ( string argument in arguments )
          {

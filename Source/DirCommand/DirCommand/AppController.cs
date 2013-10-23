@@ -6,21 +6,31 @@ namespace DirCommand
    {
       public int Run( string[] arguments )
       {
-         var runSettings = GetRunSettings( arguments );
+         int exitCode = 0;
 
-         // Read files
+         try
+         {
+            var runSettings = GetRunSettings( arguments );
 
-         var fileSystem = Dependency.Resolve<IFileSystem>();
+            // Read files
 
-         var files = fileSystem.GetFiles( runSettings.Path );
+            var fileSystem = Dependency.Resolve<IFileSystem>();
 
-         // Display
+            var files = fileSystem.GetFiles( runSettings.Path );
 
-         var displayController = Dependency.Resolve<IDisplayController>();
+            // Display
 
-         displayController.Display( files );
+            var displayController = Dependency.Resolve<IDisplayController>();
 
-         return 0;
+            displayController.Display( files );
+
+         }
+         catch ( AbortProgramException ex )
+         {
+            exitCode = ex.ExitCode;
+         }
+
+         return exitCode;
       }
 
       private static RunSettings GetRunSettings( string[] arguments )

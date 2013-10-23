@@ -127,8 +127,7 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
-      [ExpectedException( typeof( AbortProgramException ) )]
-      public void Run_ArgumentParserEncountersUnrecognizedArgument_DisplaysErrorMessageAndAborts()
+      public void Run_ArgumentParserEncountersUnrecognizedArgument_DisplaysErrorMessage()
       {
          const string errorMessage = "This is the error message";
 
@@ -153,8 +152,7 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
-      [ExpectedException( typeof( AbortProgramException ) )]
-      public void Run_ArgumentParserEncountersUnrecognizedArgument_ThrowsAbortProgramException()
+      public void Run_ArgumentParserEncountersUnrecognizedArgument_ReturnsExitCodeOfOnes()
       {
          const string errorMessage = "This is the error message";
 
@@ -171,7 +169,9 @@ namespace DirCommand.UnitTest
 
          var appController = new AppController();
 
-         appController.Run( null );
+         int exitCode = appController.Run( null );
+
+         Assert.AreEqual( 1, exitCode );
       }
 
       [TestMethod]

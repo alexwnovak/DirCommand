@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 
 namespace DirCommand
 {
@@ -11,7 +12,7 @@ namespace DirCommand
 
       public string[] GetFiles( string path )
       {
-         return Directory.GetFiles( path );
+         return Directory.GetFiles( path ).Select( Path.GetFileName ).ToArray();
       }
    }
 }

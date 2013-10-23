@@ -1,15 +1,17 @@
-﻿namespace DirCommand
+﻿using System.IO;
+
+namespace DirCommand
 {
    public class FileSystem : IFileSystem
    {
       public string[] GetDirectories( string path )
       {
-         throw new System.NotImplementedException();
+         return Directory.GetDirectories( path );
       }
 
       public string[] GetFiles( string path )
       {
-         throw new System.NotImplementedException();
+         return Directory.GetFiles( path );
       }
    }
 }

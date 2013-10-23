@@ -23,7 +23,6 @@ namespace DirCommand
             var displayController = Dependency.Resolve<IDisplayController>();
 
             displayController.Display( files );
-
          }
          catch ( AbortProgramException ex )
          {

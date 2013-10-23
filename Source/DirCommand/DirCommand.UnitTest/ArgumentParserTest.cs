@@ -170,5 +170,20 @@ namespace DirCommand.UnitTest
 
          Assert.IsTrue( runSettings.DisplayAsLowercase );
       }
+
+      [TestMethod]
+      public void Parse_PassesLowercaseFlagAsUppercase_EnablesLowercaseDisplay()
+      {
+         var arguments = new[]
+         {
+            "/L"
+         };
+
+         var argumentParser = new ArgumentParser();
+
+         var runSettings = argumentParser.Parse( arguments );
+
+         Assert.IsTrue( runSettings.DisplayAsLowercase );  
+      }
    }
 }

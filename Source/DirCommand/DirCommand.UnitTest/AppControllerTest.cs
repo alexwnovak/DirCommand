@@ -44,7 +44,7 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
-      public void Run_HappyPath_DoesNotThrowAbortProgramException()
+      public void Run_HappyPath_ReturnsExitCodeZero()
       {
          // Setup
 
@@ -62,14 +62,9 @@ namespace DirCommand.UnitTest
 
          var appController = new AppController();
 
-         try
-         {
-            appController.Run( null );
-         }
-         catch ( AbortProgramException )
-         {
-            Assert.Fail( "AbortProgramException thrown" );
-         }
+         int exitCode = appController.Run( null );
+
+         Assert.AreEqual( 0, exitCode );
       }
 
       [TestMethod]

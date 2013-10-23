@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AppController.cs" />
     <Compile Include="ArgumentHandlerAttribute.cs" />
+    <Compile Include="ArgumentHandlers.cs" />
     <Compile Include="ArgumentParser.cs" />
     <Compile Include="ConsoleAdapter.cs" />
     <Compile Include="Dependency.cs" />

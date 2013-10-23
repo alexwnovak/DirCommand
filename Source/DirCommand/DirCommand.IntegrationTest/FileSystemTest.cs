@@ -21,7 +21,7 @@ namespace DirCommand.IntegrationTest
          
          // Test
 
-         var fileSystem = new FileController();
+         var fileSystem = new FileSystem();
 
          var files = fileSystem.GetFiles( tempDirectory );
 
@@ -38,7 +38,7 @@ namespace DirCommand.IntegrationTest
 
          // Test
 
-         var fileSystem = new FileController();
+         var fileSystem = new FileSystem();
 
          var files = fileSystem.GetFiles( tempDirectory );
 
@@ -57,7 +57,7 @@ namespace DirCommand.IntegrationTest
 
          // Test
 
-         var fileSystem = new FileController();
+         var fileSystem = new FileSystem();
 
          var files = fileSystem.GetFiles( tempDirectory );
 

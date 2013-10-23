@@ -16,6 +16,12 @@
          internal set;
       }
 
+      public bool DisplayAsLowercase
+      {
+         get;
+         internal set;
+      }
+
       public RunSettings()
       {
          Path = DefaultPath;

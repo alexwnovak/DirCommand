@@ -145,5 +145,30 @@ namespace DirCommand.UnitTest
 
          argumentParser.Parse( arguments );
       }
+
+      [TestMethod]
+      public void Parse_DoesNotPowerLowercaseFlag_LowercaseDisplayIsDisabledByDefault()
+      {
+         var argumentParser = new ArgumentParser();
+
+         var runSettings = argumentParser.Parse( null );
+
+         Assert.IsFalse( runSettings.DisplayAsLowercase );
+      }
+
+      [TestMethod]
+      public void Parse_PassesLowercaseFlag_EnablesLowercaseDisplay()
+      {
+         var arguments = new[]
+         {
+            "/l"
+         };
+
+         var argumentParser = new ArgumentParser();
+
+         var runSettings = argumentParser.Parse( arguments );
+
+         Assert.IsTrue( runSettings.DisplayAsLowercase );
+      }
    }
 }

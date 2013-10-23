@@ -21,6 +21,10 @@ namespace DirCommand
                {
                   runSettings.RecurseSubdirectories = true;
                }
+               else if ( argument.ToLower() == "/l" )
+               {
+                  runSettings.DisplayAsLowercase = true;
+               }
                else
                {
                   throw new ArgumentException( "Unrecognized argument:" + argument );

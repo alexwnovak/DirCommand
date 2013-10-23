@@ -147,7 +147,7 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
-      public void Run_ArgumentParserEncountersUnrecognizedArgument_ReturnsExitCodeOfOnes()
+      public void Run_ArgumentParserEncountersUnrecognizedArgument_ReturnsExitCodeOfOne()
       {
          const string errorMessage = "This is the error message";
 

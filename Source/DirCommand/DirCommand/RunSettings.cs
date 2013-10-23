@@ -7,7 +7,7 @@
       public string Path
       {
          get;
-         internal set;
+         set;
       }
 
       public bool RecurseSubdirectories

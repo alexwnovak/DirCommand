@@ -9,10 +9,11 @@ namespace DirCommand
          // Parse the arguments
 
          var argumentParser = Dependency.Resolve<IArgumentParser>();
+         RunSettings runSettings;
 
          try
          {
-            argumentParser.Parse( arguments );
+            runSettings = argumentParser.Parse( arguments );
          }
          catch ( ArgumentException ex )
          {
@@ -24,7 +25,7 @@ namespace DirCommand
 
          var fileSystem = Dependency.Resolve<IFileSystem>();
 
-         var files = fileSystem.GetFiles( "." );
+         var files = fileSystem.GetFiles( runSettings.Path );
 
          // Display
 

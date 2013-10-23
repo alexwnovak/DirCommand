@@ -168,5 +168,62 @@ namespace DirCommand.UnitTest
 
          Assert.AreEqual( 1, exitCode );
       }
+
+      [TestMethod]
+      public void Run_RunSettingsHasDefaultPath_UsesDefaultPathWithFileSystem()
+      {
+         // Setup
+
+         var argumentParserMock = new Mock<IArgumentParser>();
+         argumentParserMock.Setup( ap => ap.Parse( It.IsAny<string[]>() ) ).Returns( new RunSettings() );
+         Dependency.RegisterInstance( argumentParserMock.Object );
+
+         var fileSystemMock = new Mock<IFileSystem>();
+         Dependency.RegisterInstance( fileSystemMock.Object );
+
+         var displayControllerMock = new Mock<IDisplayController>();
+         Dependency.RegisterInstance( displayControllerMock.Object );
+
+         // Test
+
+         var appController = new AppController();
+
+         appController.Run( null );
+
+         // Assert
+
+         fileSystemMock.Verify( fs => fs.GetFiles( RunSettings.DefaultPath ), Times.Once() );
+      }
+
+      [TestMethod]
+      public void Run_RunSettingsHasCustomPath_UsesDefaultPathWithFileSystem()
+      {
+         var runSettings = new RunSettings
+         {
+            Path = "SomePath"
+         };
+
+         // Setup
+
+         var argumentParserMock = new Mock<IArgumentParser>();
+         argumentParserMock.Setup( ap => ap.Parse( It.IsAny<string[]>() ) ).Returns( runSettings );
+         Dependency.RegisterInstance( argumentParserMock.Object );
+
+         var fileSystemMock = new Mock<IFileSystem>();
+         Dependency.RegisterInstance( fileSystemMock.Object );
+
+         var displayControllerMock = new Mock<IDisplayController>();
+         Dependency.RegisterInstance( displayControllerMock.Object );
+
+         // Test
+
+         var appController = new AppController();
+
+         appController.Run( null );
+
+         // Assert
+
+         fileSystemMock.Verify( fs => fs.GetFiles( runSettings.Path ), Times.Once() );
+      }
    }
 }

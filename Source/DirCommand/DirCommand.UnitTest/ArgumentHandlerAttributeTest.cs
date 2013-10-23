@@ -14,5 +14,15 @@ namespace DirCommand.UnitTest
 
          Assert.AreEqual( argument, argumentHandlerAttribute.Argument );
       }
+
+      [TestMethod]
+      public void Constructor_PassesUppercaseArgument_StoresArgumentAsLowercase()
+      {
+         const string argument = "UppercaseArgument";
+
+         var argumentHandlerAttribute = new ArgumentHandlerAttribute( argument );
+
+         Assert.AreEqual( argument.ToLower(), argumentHandlerAttribute.Argument );  
+      }
    }
 }

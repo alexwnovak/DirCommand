@@ -20,7 +20,7 @@ namespace DirCommand.UnitTest
 
          // Setup
 
-         var fileSystemMock = new Mock<IFileSystem>();
+         var fileSystemMock = new Mock<IFileController>();
          fileSystemMock.Setup( fsm => fsm.GetFiles( It.IsAny<string>() ) ).Returns( files );
          Dependency.RegisterInstance( fileSystemMock.Object );
 
@@ -48,7 +48,7 @@ namespace DirCommand.UnitTest
       {
          // Setup
 
-         var fileSystemMock = new Mock<IFileSystem>();
+         var fileSystemMock = new Mock<IFileController>();
          Dependency.RegisterInstance( fileSystemMock.Object );
 
          var displayControllerMock = new Mock<IDisplayController>();
@@ -72,7 +72,7 @@ namespace DirCommand.UnitTest
       {
          // Setup
 
-         var fileSystemMock = new Mock<IFileSystem>();
+         var fileSystemMock = new Mock<IFileController>();
          Dependency.RegisterInstance( fileSystemMock.Object );
 
          var displayControllerMock = new Mock<IDisplayController>();
@@ -100,7 +100,7 @@ namespace DirCommand.UnitTest
 
          // Setup
 
-         var fileSystemMock = new Mock<IFileSystem>();
+         var fileSystemMock = new Mock<IFileController>();
          Dependency.RegisterInstance( fileSystemMock.Object );
 
          var displayControllerMock = new Mock<IDisplayController>();
@@ -178,7 +178,7 @@ namespace DirCommand.UnitTest
          argumentParserMock.Setup( ap => ap.Parse( It.IsAny<string[]>() ) ).Returns( new RunSettings() );
          Dependency.RegisterInstance( argumentParserMock.Object );
 
-         var fileSystemMock = new Mock<IFileSystem>();
+         var fileSystemMock = new Mock<IFileController>();
          Dependency.RegisterInstance( fileSystemMock.Object );
 
          var displayControllerMock = new Mock<IDisplayController>();
@@ -209,7 +209,7 @@ namespace DirCommand.UnitTest
          argumentParserMock.Setup( ap => ap.Parse( It.IsAny<string[]>() ) ).Returns( runSettings );
          Dependency.RegisterInstance( argumentParserMock.Object );
 
-         var fileSystemMock = new Mock<IFileSystem>();
+         var fileSystemMock = new Mock<IFileController>();
          Dependency.RegisterInstance( fileSystemMock.Object );
 
          var displayControllerMock = new Mock<IDisplayController>();

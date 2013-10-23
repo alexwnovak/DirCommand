@@ -41,7 +41,7 @@ namespace DirCommand
 
       private static string[] GetFileEntries( RunSettings runSettings )
       {
-         var fileSystem = Dependency.Resolve<IFileSystem>();
+         var fileSystem = Dependency.Resolve<IFileController>();
 
          return fileSystem.GetFiles( runSettings.Path );
       }

@@ -5,7 +5,7 @@
       private static void InitDependencyInjection()
       {
          Dependency.CreateUnityContainer();
-         Dependency.RegisterType<IFileSystem, FileSystem>();
+         Dependency.RegisterType<IFileController, FileController>();
          Dependency.RegisterType<IConsoleAdapter, ConsoleAdapter>();
          Dependency.RegisterType<IArgumentParser, ArgumentParser>();
          Dependency.RegisterType<IDisplayController, DisplayController>();

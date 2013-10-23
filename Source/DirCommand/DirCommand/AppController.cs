@@ -12,17 +12,9 @@ namespace DirCommand
          {
             var runSettings = GetRunSettings( arguments );
 
-            // Read files
+            var files = GetFileEntries( runSettings );
 
-            var fileSystem = Dependency.Resolve<IFileSystem>();
-
-            var files = fileSystem.GetFiles( runSettings.Path );
-
-            // Display
-
-            var displayController = Dependency.Resolve<IDisplayController>();
-
-            displayController.Display( files );
+            DisplayFileEntries( files );
          }
          catch ( AbortProgramException ex )
          {
@@ -45,6 +37,20 @@ namespace DirCommand
             Dependency.Resolve<IDisplayController>().ShowError( ex.Message );
             throw new AbortProgramException( 1 );
          }
+      }
+
+      private static string[] GetFileEntries( RunSettings runSettings )
+      {
+         var fileSystem = Dependency.Resolve<IFileSystem>();
+
+         return fileSystem.GetFiles( runSettings.Path );
+      }
+
+      private static void DisplayFileEntries( string[] files )
+      {
+         var displayController = Dependency.Resolve<IDisplayController>();
+
+         displayController.Display( files );
       }
    }
 }

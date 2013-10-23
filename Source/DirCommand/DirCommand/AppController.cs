@@ -6,20 +6,7 @@ namespace DirCommand
    {
       public int Run( string[] arguments )
       {
-         // Parse the arguments
-
-         var argumentParser = Dependency.Resolve<IArgumentParser>();
-         RunSettings runSettings;
-
-         try
-         {
-            runSettings = argumentParser.Parse( arguments );
-         }
-         catch ( ArgumentException ex )
-         {
-            Dependency.Resolve<IDisplayController>().ShowError( ex.Message );
-            return 1;
-         }
+         var runSettings = GetRunSettings( arguments );
 
          // Read files
 
@@ -34,6 +21,21 @@ namespace DirCommand
          displayController.Display( files );
 
          return 0;
+      }
+
+      private static RunSettings GetRunSettings( string[] arguments )
+      {
+         var argumentParser = Dependency.Resolve<IArgumentParser>();
+
+         try
+         {
+            return argumentParser.Parse( arguments );
+         }
+         catch ( ArgumentException ex )
+         {
+            Dependency.Resolve<IDisplayController>().ShowError( ex.Message );
+            throw new AbortProgramException( 1 );
+         }
       }
    }
 }

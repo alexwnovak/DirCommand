@@ -28,6 +28,7 @@ namespace DirCommand.UnitTest
          Dependency.RegisterInstance( displayControllerMock.Object );
 
          var argumentParserMock = new Mock<IArgumentParser>();
+         argumentParserMock.Setup( ap => ap.Parse( It.IsAny<string[]>() ) ).Returns( new RunSettings() );
          Dependency.RegisterInstance( argumentParserMock.Object );
 
          // Test
@@ -43,7 +44,7 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
-      public void Run_HappyPath_ReturnsSuccessExitCode()
+      public void Run_HappyPath_DoesNotThrowAbortProgramException()
       {
          // Setup
 
@@ -54,17 +55,21 @@ namespace DirCommand.UnitTest
          Dependency.RegisterInstance( displayControllerMock.Object );
 
          var argumentParserMock = new Mock<IArgumentParser>();
+         argumentParserMock.Setup( ap => ap.Parse( It.IsAny<string[]>() ) ).Returns( new RunSettings() );
          Dependency.RegisterInstance( argumentParserMock.Object );
 
          // Test
 
          var appController = new AppController();
 
-         int exitCode = appController.Run( null );
-
-         // Verify
-
-         Assert.AreEqual( 0, exitCode );
+         try
+         {
+            appController.Run( null );
+         }
+         catch ( AbortProgramException )
+         {
+            Assert.Fail( "AbortProgramException thrown" );
+         }
       }
 
       [TestMethod]
@@ -79,6 +84,7 @@ namespace DirCommand.UnitTest
          Dependency.RegisterInstance( displayControllerMock.Object );
 
          var argumentParserMock = new Mock<IArgumentParser>();
+         argumentParserMock.Setup( ap => ap.Parse( It.IsAny<string[]>() ) ).Returns( new RunSettings() );
          Dependency.RegisterInstance( argumentParserMock.Object );
 
          // Test
@@ -106,6 +112,7 @@ namespace DirCommand.UnitTest
          Dependency.RegisterInstance( displayControllerMock.Object );
 
          var argumentParserMock = new Mock<IArgumentParser>();
+         argumentParserMock.Setup( ap => ap.Parse( It.IsAny<string[]>() ) ).Returns( new RunSettings() );
          Dependency.RegisterInstance( argumentParserMock.Object );
 
          // Test
@@ -120,7 +127,8 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
-      public void Run_ArgumentParserEncountersUnrecognizedArgument_DisplaysErrorMessage()
+      [ExpectedException( typeof( AbortProgramException ) )]
+      public void Run_ArgumentParserEncountersUnrecognizedArgument_DisplaysErrorMessageAndAborts()
       {
          const string errorMessage = "This is the error message";
 
@@ -145,7 +153,8 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
-      public void Run_ArgumentParserEncountersUnrecognizedArgument_ReturnsErrorExitCode()
+      [ExpectedException( typeof( AbortProgramException ) )]
+      public void Run_ArgumentParserEncountersUnrecognizedArgument_ThrowsAbortProgramException()
       {
          const string errorMessage = "This is the error message";
 
@@ -162,11 +171,7 @@ namespace DirCommand.UnitTest
 
          var appController = new AppController();
 
-         int exitCode = appController.Run( null );
-
-         // Assert
-
-         Assert.AreEqual( 1, exitCode );
+         appController.Run( null );
       }
 
       [TestMethod]

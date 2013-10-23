@@ -12,7 +12,11 @@ namespace DirCommand
 
       public string[] GetFiles( string path )
       {
-         return Directory.GetFiles( path ).Select( Path.GetFileName ).ToArray();
+         var directories = Directory.GetDirectories( path ).Select( Path.GetFileName );
+
+         var files = Directory.GetFiles( path ).Select( Path.GetFileName );
+
+         return directories.Concat( files ).ToArray();
       }
    }
 }

@@ -17,7 +17,7 @@ namespace DirCommand
          {
             if ( argument.StartsWith( "/" ) )
             {
-               if ( argument == "/r" )
+               if ( argument.ToLower() == "/r" )
                {
                   runSettings.RecurseSubdirectories = true;
                }

@@ -73,6 +73,21 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
+      public void Parse_PassesRecursionFlagWithCapitalLetter_EnablesRecursion()
+      {
+         var arguments = new[]
+         {
+            "/R"
+         };
+
+         var argumentParser = new ArgumentParser();
+
+         var runSettings = argumentParser.Parse( arguments );
+
+         Assert.IsTrue( runSettings.RecurseSubdirectories );
+      }
+
+      [TestMethod]
       public void Parse_PassesNonPathArgument_PathIsNotChanged()
       {
          var arguments = new[]

@@ -63,6 +63,7 @@
     <Compile Include="AppControllerTest.cs" />
     <Compile Include="ArgumentHandlerAttributeTest.cs" />
     <Compile Include="ArgumentParserTest.cs" />
+    <Compile Include="FileControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

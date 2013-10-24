@@ -57,6 +57,7 @@
     <Compile Include="Dependency.cs" />
     <Compile Include="DisplayController.cs" />
     <Compile Include="FileController.cs" />
+    <Compile Include="FileEntry.cs" />
     <Compile Include="FileSystem.cs" />
     <Compile Include="IArgumentParser.cs" />
     <Compile Include="IConsoleAdapter.cs" />

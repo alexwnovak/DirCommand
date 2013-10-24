@@ -16,7 +16,7 @@ namespace DirCommand.UnitTest
       [TestMethod]
       public void Run_ArgumentsIsNull_FilesAreReadAndSentToTheDisplayController()
       {
-         var files = new string[0];
+         var files = new FileEntry[0];
 
          // Setup
 

@@ -2,6 +2,6 @@
 {
    public interface IFileController
    {
-      string[] GetFiles( string path );
+      FileEntry[] GetFiles( string path );
    }
 }

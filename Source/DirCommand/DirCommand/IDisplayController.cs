@@ -2,7 +2,7 @@
 {
    public interface IDisplayController
    {
-      void Display( string[] files );
+      void Display( FileEntry[] files );
 
       void ShowError( string message );
    }

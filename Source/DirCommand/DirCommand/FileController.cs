@@ -5,15 +5,17 @@ namespace DirCommand
 {
    public class FileController : IFileController
    {
-      public string[] GetFiles( string path )
+      public FileEntry[] GetFiles( string path )
       {
-         var fileSystem = Dependency.Resolve<IFileSystem>();
+         return new FileEntry[0];
 
-         var directories = fileSystem.GetDirectories( path ).Select( Path.GetFileName );
+         //var fileSystem = Dependency.Resolve<IFileSystem>();
 
-         var files = fileSystem.GetFiles( path ).Select( Path.GetFileName );
+         //var directories = fileSystem.GetDirectories( path ).Select( Path.GetFileName );
 
-         return directories.Concat( files ).ToArray();
+         //var files = fileSystem.GetFiles( path ).Select( Path.GetFileName );
+
+         //return directories.Concat( files ).ToArray();
       }
    }
 }

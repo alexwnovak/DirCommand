@@ -2,9 +2,8 @@
 {
    public class DisplayController : IDisplayController
    {
-      public void Display( string[] files )
+      public void Display( FileEntry[] files )
       {
-
       }
 
       public void ShowError( string message )

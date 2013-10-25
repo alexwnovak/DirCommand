@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Linq;
 
 namespace DirCommand
 {
@@ -7,7 +6,12 @@ namespace DirCommand
    {
       public FileEntry[] GetFiles( string path )
       {
-         return new FileEntry[0];
+         var fileSystem = Dependency.Resolve<IFileSystem>();
+
+         return fileSystem.GetFiles( path ).Select( f => new FileEntry
+         {
+            FullName = f
+         }).ToArray();
 
          //var fileSystem = Dependency.Resolve<IFileSystem>();
 

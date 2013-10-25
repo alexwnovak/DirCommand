@@ -13,44 +13,22 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
-      public void GetFiles_HappyPath_ReturnsEmptyArray()
+      public void Run_DefaultRunSettings_ReadsFilesFromCurrentDirectory()
       {
          // Setup
 
          var fileSystemMock = new Mock<IFileSystem>();
          Dependency.RegisterInstance( fileSystemMock.Object );
 
-         // Test
+         // Run
 
          var fileController = new FileController();
 
-         var files = fileController.GetFiles( "." );
-
-         Assert.AreEqual( 0, files.Length );
-      }
-
-      [TestMethod]
-      public void GetFiles_FileSystemHasOneFile_ReturnsTheOneFile()
-      {
-         const string fileName = @"C:\SomeFile.txt";
-         const string path = "SomePath";
-
-         // Setup
-
-         var fileSystemMock = new Mock<IFileSystem>();
-         fileSystemMock.Setup( fs => fs.GetFiles( It.IsAny<string>() ) ).Returns( fileName.AsArray() ); 
-         Dependency.RegisterInstance( fileSystemMock.Object );
-
-         // Test
-
-         var fileController = new FileController();
-
-         var files = fileController.GetFiles( path );
+         fileController.Run( new RunSettings() );
 
          // Assert
 
-         Assert.AreEqual( 1, files.Length );
-         Assert.AreEqual( fileName, files[0].FullName );
+         fileSystemMock.Verify( fs => fs.GetFiles( RunSettings.DefaultPath ), Times.Once() );
       }
    }
 }

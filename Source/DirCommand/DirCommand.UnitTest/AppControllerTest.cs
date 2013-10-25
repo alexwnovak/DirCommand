@@ -16,13 +16,11 @@ namespace DirCommand.UnitTest
       [TestMethod]
       public void Run_ArgumentsIsNull_FileControllerRunsWithRunSettings()
       {
-         var files = new FileEntry[0];
          var runSettings = new RunSettings();
          
          // Setup
 
          var fileControllerMock = new Mock<IFileController>();
-         fileControllerMock.Setup( fc => fc.GetFiles( It.IsAny<string>() ) ).Returns( files );
          Dependency.RegisterInstance( fileControllerMock.Object );
 
          var displayControllerMock = new Mock<IDisplayController>();

@@ -12,7 +12,9 @@ namespace DirCommand
          {
             var runSettings = GetRunSettings( arguments );
 
-            DisplayFileEntries( runSettings );
+            var fileController = Dependency.Resolve<IFileController>();
+
+            fileController.Run( runSettings );
          }
          catch ( AbortProgramException ex )
          {
@@ -35,13 +37,6 @@ namespace DirCommand
             Dependency.Resolve<IDisplayController>().ShowError( ex.Message );
             throw new AbortProgramException( 1 );
          }
-      }
-
-      private static void DisplayFileEntries( RunSettings runSettings )
-      {
-         var fileController = Dependency.Resolve<IFileController>();
-
-         fileController.Run( runSettings );
       }
    }
 }

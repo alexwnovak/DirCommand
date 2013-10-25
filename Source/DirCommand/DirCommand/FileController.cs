@@ -21,5 +21,10 @@ namespace DirCommand
 
          //return directories.Concat( files ).ToArray();
       }
+
+      public void Run( RunSettings runSettings )
+      {
+         
+      }
    }
 }

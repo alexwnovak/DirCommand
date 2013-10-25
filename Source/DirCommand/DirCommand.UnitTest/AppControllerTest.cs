@@ -14,21 +14,22 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
-      public void Run_ArgumentsIsNull_FilesAreReadAndSentToTheDisplayController()
+      public void Run_ArgumentsIsNull_FileControllerRunsWithRunSettings()
       {
          var files = new FileEntry[0];
-
+         var runSettings = new RunSettings();
+         
          // Setup
 
-         var fileSystemMock = new Mock<IFileController>();
-         fileSystemMock.Setup( fsm => fsm.GetFiles( It.IsAny<string>() ) ).Returns( files );
-         Dependency.RegisterInstance( fileSystemMock.Object );
+         var fileControllerMock = new Mock<IFileController>();
+         fileControllerMock.Setup( fc => fc.GetFiles( It.IsAny<string>() ) ).Returns( files );
+         Dependency.RegisterInstance( fileControllerMock.Object );
 
          var displayControllerMock = new Mock<IDisplayController>();
          Dependency.RegisterInstance( displayControllerMock.Object );
 
          var argumentParserMock = new Mock<IArgumentParser>();
-         argumentParserMock.Setup( ap => ap.Parse( It.IsAny<string[]>() ) ).Returns( new RunSettings() );
+         argumentParserMock.Setup( ap => ap.Parse( It.IsAny<string[]>() ) ).Returns( runSettings );
          Dependency.RegisterInstance( argumentParserMock.Object );
 
          // Test
@@ -39,8 +40,7 @@ namespace DirCommand.UnitTest
 
          // Verify
 
-         fileSystemMock.Verify( fsm => fsm.GetFiles( It.IsAny<string>() ), Times.Once() );
-         displayControllerMock.Verify( cam => cam.Display( files ), Times.Once() );
+         fileControllerMock.Verify( fc => fc.Run( runSettings ), Times.Once() );
       }
 
       [TestMethod]
@@ -170,32 +170,6 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
-      public void Run_RunSettingsHasDefaultPath_UsesDefaultPathWithFileSystem()
-      {
-         // Setup
-
-         var argumentParserMock = new Mock<IArgumentParser>();
-         argumentParserMock.Setup( ap => ap.Parse( It.IsAny<string[]>() ) ).Returns( new RunSettings() );
-         Dependency.RegisterInstance( argumentParserMock.Object );
-
-         var fileSystemMock = new Mock<IFileController>();
-         Dependency.RegisterInstance( fileSystemMock.Object );
-
-         var displayControllerMock = new Mock<IDisplayController>();
-         Dependency.RegisterInstance( displayControllerMock.Object );
-
-         // Test
-
-         var appController = new AppController();
-
-         appController.Run( null );
-
-         // Assert
-
-         fileSystemMock.Verify( fs => fs.GetFiles( RunSettings.DefaultPath ), Times.Once() );
-      }
-
-      [TestMethod]
       public void Run_RunSettingsHasCustomPath_UsesDefaultPathWithFileSystem()
       {
          var runSettings = new RunSettings
@@ -209,8 +183,8 @@ namespace DirCommand.UnitTest
          argumentParserMock.Setup( ap => ap.Parse( It.IsAny<string[]>() ) ).Returns( runSettings );
          Dependency.RegisterInstance( argumentParserMock.Object );
 
-         var fileSystemMock = new Mock<IFileController>();
-         Dependency.RegisterInstance( fileSystemMock.Object );
+         var fileControllerMock = new Mock<IFileController>();
+         Dependency.RegisterInstance( fileControllerMock.Object );
 
          var displayControllerMock = new Mock<IDisplayController>();
          Dependency.RegisterInstance( displayControllerMock.Object );
@@ -223,7 +197,7 @@ namespace DirCommand.UnitTest
 
          // Assert
 
-         fileSystemMock.Verify( fs => fs.GetFiles( runSettings.Path ), Times.Once() );
+         fileControllerMock.Verify( fc => fc.Run( runSettings ), Times.Once() );
       }
    }
 }

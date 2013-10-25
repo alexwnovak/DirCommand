@@ -12,9 +12,7 @@ namespace DirCommand
          {
             var runSettings = GetRunSettings( arguments );
 
-            var files = GetFileEntries( runSettings );
-
-            DisplayFileEntries( files );
+            DisplayFileEntries( runSettings );
          }
          catch ( AbortProgramException ex )
          {
@@ -39,18 +37,11 @@ namespace DirCommand
          }
       }
 
-      private static FileEntry[] GetFileEntries( RunSettings runSettings )
+      private static void DisplayFileEntries( RunSettings runSettings )
       {
-         var fileSystem = Dependency.Resolve<IFileController>();
+         var fileController = Dependency.Resolve<IFileController>();
 
-         return fileSystem.GetFiles( runSettings.Path );
-      }
-
-      private static void DisplayFileEntries( FileEntry[] files )
-      {
-         var displayController = Dependency.Resolve<IDisplayController>();
-
-         displayController.Display( files );
+         fileController.Run( runSettings );
       }
    }
 }

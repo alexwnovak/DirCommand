@@ -101,5 +101,35 @@ namespace DirCommand.UnitTest
 
          consoleAdapterMock.Verify( ca => ca.WriteLine( fileName, ConsoleColor.Green ), Times.Once() );
       }
+
+      [TestMethod]
+      public void Run_PathContainsUppercaseFile_DisplaysProperColor()
+      {
+         const string fileName = "SomeExecutable.EXE";
+         const ConsoleColor exeColor = ConsoleColor.Green;
+
+         // Setup
+
+         var fileSystemMock = new Mock<IFileSystem>();
+         fileSystemMock.Setup( fs => fs.GetFiles( It.IsAny<string>() ) ).Returns( fileName.AsArray() );
+         Dependency.RegisterInstance( fileSystemMock.Object );
+
+         var consoleAdapterMock = new Mock<IConsoleAdapter>();
+         Dependency.RegisterInstance( consoleAdapterMock.Object );
+
+         var settingsRepoMock = new Mock<ISettingsRepository>();
+         settingsRepoMock.Setup( sr => sr.GetExtensionColor( ".exe" ) ).Returns( exeColor );
+         Dependency.RegisterInstance( settingsRepoMock.Object );
+
+         // Test
+
+         var fileController = new FileController();
+
+         fileController.Run( new RunSettings() );
+
+         // Assert
+
+         consoleAdapterMock.Verify( ca => ca.WriteLine( fileName, ConsoleColor.Green ), Times.Once() );
+      }
    }
 }

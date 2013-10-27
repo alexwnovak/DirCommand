@@ -38,7 +38,7 @@ namespace DirCommand
 
          foreach ( string file in files )
          {
-            string extension = Path.GetExtension( file );
+            string extension = Path.GetExtension( file ).ToLower();
 
             ConsoleColor color = settingsRepository.GetExtensionColor( extension );
 

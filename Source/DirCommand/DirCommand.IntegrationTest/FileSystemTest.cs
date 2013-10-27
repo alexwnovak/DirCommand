@@ -43,7 +43,7 @@ namespace DirCommand.IntegrationTest
          var files = fileSystem.GetFiles( tempDirectory );
 
          Assert.AreEqual( 1, files.Count() );
-         Assert.AreEqual( fileName, files.First() );
+         Assert.AreEqual( fileName, files.First().FullName );
       }
 
       [TestMethod]
@@ -62,8 +62,8 @@ namespace DirCommand.IntegrationTest
          var files = fileSystem.GetFiles( tempDirectory );
 
          Assert.AreEqual( 2, files.Count() );
-         Assert.AreEqual( subDirectory, files.First() );
-         Assert.AreEqual( fileName, files.ElementAt( 1 ) );
+         Assert.AreEqual( subDirectory, files.First().FullName );
+         Assert.AreEqual( fileName, files.ElementAt( 1 ).FullName );
       }
    }
 }

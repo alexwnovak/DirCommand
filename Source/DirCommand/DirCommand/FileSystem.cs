@@ -1,5 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.Linq;
 
 namespace DirCommand
 {
@@ -12,13 +12,14 @@ namespace DirCommand
 
       public FileEntry[] GetFiles( string path )
       {
-         throw new NotImplementedException();
+         var directories = Directory.GetDirectories( path ).Select( Path.GetFileName );
 
-         //var directories = Directory.GetDirectories( path ).Select( Path.GetFileName );
+         var files = Directory.GetFiles( path ).Select( Path.GetFileName );
 
-         //var files = Directory.GetFiles( path ).Select( Path.GetFileName );
-
-         //return directories.Concat( files ).ToArray();
+         return directories.Concat( files ).Select( f => new FileEntry
+         {
+            FullName = f
+         }).ToArray();
       }
    }
 }

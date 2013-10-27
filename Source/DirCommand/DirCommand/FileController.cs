@@ -1,4 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
+using System.Linq;
 
 namespace DirCommand
 {
@@ -28,11 +32,17 @@ namespace DirCommand
 
          var files = fileSystem.GetFiles( runSettings.Path );
 
+         var settingsRepository = Dependency.Resolve<ISettingsRepository>();
+
          var consoleAdapter = Dependency.Resolve<IConsoleAdapter>();
 
          foreach ( string file in files )
          {
-            consoleAdapter.WriteLine( file );
+            string extension = Path.GetExtension( file );
+
+            ConsoleColor color = settingsRepository.GetExtensionColor( extension );
+
+            consoleAdapter.WriteLine( file, color );
          }
       }
    }

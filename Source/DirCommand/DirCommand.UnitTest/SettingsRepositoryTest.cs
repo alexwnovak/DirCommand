@@ -15,5 +15,15 @@ namespace DirCommand.UnitTest
 
          Assert.AreEqual( ConsoleColor.Gray, consoleColor );
       }
+
+      [TestMethod]
+      public void GetExtensionColor_ExtensionHasMapping_ReturnsItsColor()
+      {
+         var settingsRepository = new SettingsRepository();
+
+         var consoleColor = settingsRepository.GetExtensionColor( ".exe" );
+
+         Assert.AreEqual( ConsoleColor.Green, consoleColor );
+      }
    }
 }

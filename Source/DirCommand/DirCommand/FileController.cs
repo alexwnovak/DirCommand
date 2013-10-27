@@ -26,7 +26,14 @@ namespace DirCommand
       {
          var fileSystem = Dependency.Resolve<IFileSystem>();
 
-         fileSystem.GetFiles( runSettings.Path );
+         var files = fileSystem.GetFiles( runSettings.Path );
+
+         var consoleAdapter = Dependency.Resolve<IConsoleAdapter>();
+
+         foreach ( string file in files )
+         {
+            consoleAdapter.WriteLine( file );
+         }
       }
    }
 }

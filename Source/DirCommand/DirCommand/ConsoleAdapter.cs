@@ -4,6 +4,11 @@ namespace DirCommand
 {
    public class ConsoleAdapter : IConsoleAdapter
    {
+      public void Write( object obj )
+      {
+         Console.Write( obj.ToString() );
+      }
+
       public void WriteLine( string text )
       {
          Console.WriteLine( text );

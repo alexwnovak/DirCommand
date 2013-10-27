@@ -38,6 +38,8 @@ namespace DirCommand
 
          foreach ( var file in files )
          {
+            consoleAdapter.Write( file.Length );
+
             string extension = Path.GetExtension( file.FullName ).ToLower();
 
             ConsoleColor color = settingsRepository.GetExtensionColor( extension );

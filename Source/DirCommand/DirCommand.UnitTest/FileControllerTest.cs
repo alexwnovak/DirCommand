@@ -135,5 +135,37 @@ namespace DirCommand.UnitTest
 
          consoleAdapterMock.Verify( ca => ca.WriteLine( fileName, ConsoleColor.Green ), Times.Once() );
       }
+
+      [TestMethod]
+      public void Run_HasFileLength_LengthIsWrittenToConsole()
+      {
+         var fileEntry = new FileEntry
+         {
+            FullName = "SomeFile.txt",
+            Length = 123456789
+         };
+
+         // Setup
+
+         var fileSystemMock = new Mock<IFileSystem>();
+         fileSystemMock.Setup( fs => fs.GetFiles( It.IsAny<string>() ) ).Returns( fileEntry.AsArray() );
+         Dependency.RegisterInstance( fileSystemMock.Object );
+
+         var settingsRepoMock = new Mock<ISettingsRepository>();
+         Dependency.RegisterInstance( settingsRepoMock.Object );
+
+         var consoleAdapterMock = new Mock<IConsoleAdapter>();
+         Dependency.RegisterInstance( consoleAdapterMock.Object );
+
+         // Test
+
+         var fileController = new FileController();
+
+         fileController.Run( new RunSettings() );
+
+         // Assert
+
+         consoleAdapterMock.Verify( ca => ca.Write( fileEntry.Length ), Times.Once() );
+      }
    }
 }

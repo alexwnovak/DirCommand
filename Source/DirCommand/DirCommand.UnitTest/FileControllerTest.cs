@@ -76,7 +76,7 @@ namespace DirCommand.UnitTest
       public void Run_PathContainsExecutable_DisplaysExecutableWithColor()
       {
          const string fileName = "SomeExecutable.exe";
-         var exeColor = ConsoleColor.Green;
+         const ConsoleColor exeColor = ConsoleColor.Green;
 
          // Setup
 

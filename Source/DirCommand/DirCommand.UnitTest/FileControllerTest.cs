@@ -48,10 +48,12 @@ namespace DirCommand.UnitTest
             "FileThree.txt"
          };
 
+         var fileEntries = TestHelper.GetFileEntries( files );
+
          // Setup
 
          var fileSystemMock = new Mock<IFileSystem>();
-         fileSystemMock.Setup( fs => fs.GetFiles( It.IsAny<string>() ) ).Returns( files );
+         fileSystemMock.Setup( fs => fs.GetFiles( It.IsAny<string>() ) ).Returns( fileEntries );
          Dependency.RegisterInstance( fileSystemMock.Object );
 
          var consoleAdapterMock = new Mock<IConsoleAdapter>();
@@ -75,13 +77,14 @@ namespace DirCommand.UnitTest
       [TestMethod]
       public void Run_PathContainsExecutable_DisplaysExecutableWithColor()
       {
-         const string fileName = "SomeExecutable.exe";
          const ConsoleColor exeColor = ConsoleColor.Green;
+         const string fileName = "SomeExecutable.exe";
+         var fileEntries = TestHelper.GetFileEntries( fileName );
 
          // Setup
 
          var fileSystemMock = new Mock<IFileSystem>();
-         fileSystemMock.Setup( fs => fs.GetFiles( It.IsAny<string>() ) ).Returns( fileName.AsArray() );
+         fileSystemMock.Setup( fs => fs.GetFiles( It.IsAny<string>() ) ).Returns( fileEntries );
          Dependency.RegisterInstance( fileSystemMock.Object );
 
          var consoleAdapterMock = new Mock<IConsoleAdapter>();
@@ -105,13 +108,14 @@ namespace DirCommand.UnitTest
       [TestMethod]
       public void Run_PathContainsUppercaseFile_DisplaysProperColor()
       {
-         const string fileName = "SomeExecutable.EXE";
          const ConsoleColor exeColor = ConsoleColor.Green;
+         const string fileName = "SomeExecutable.EXE";
+         var fileEntries = TestHelper.GetFileEntries( fileName );
 
          // Setup
 
          var fileSystemMock = new Mock<IFileSystem>();
-         fileSystemMock.Setup( fs => fs.GetFiles( It.IsAny<string>() ) ).Returns( fileName.AsArray() );
+         fileSystemMock.Setup( fs => fs.GetFiles( It.IsAny<string>() ) ).Returns( fileEntries );
          Dependency.RegisterInstance( fileSystemMock.Object );
 
          var consoleAdapterMock = new Mock<IConsoleAdapter>();

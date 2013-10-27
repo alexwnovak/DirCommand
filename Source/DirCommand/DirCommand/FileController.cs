@@ -36,13 +36,13 @@ namespace DirCommand
 
          var consoleAdapter = Dependency.Resolve<IConsoleAdapter>();
 
-         foreach ( string file in files )
+         foreach ( var file in files )
          {
-            string extension = Path.GetExtension( file ).ToLower();
+            string extension = Path.GetExtension( file.FullName ).ToLower();
 
             ConsoleColor color = settingsRepository.GetExtensionColor( extension );
 
-            consoleAdapter.WriteLine( file, color );
+            consoleAdapter.WriteLine( file.FullName, color );
          }
       }
    }

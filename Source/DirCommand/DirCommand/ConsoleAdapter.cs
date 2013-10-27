@@ -8,5 +8,16 @@ namespace DirCommand
       {
          Console.WriteLine( text );
       }
+
+      public void WriteLine( string text, ConsoleColor foregroundColor )
+      {
+         var oldForegroundColor = Console.ForegroundColor;
+
+         Console.ForegroundColor = foregroundColor;
+
+         Console.WriteLine( text );
+
+         Console.ForegroundColor = oldForegroundColor;
+      }
    }
 }

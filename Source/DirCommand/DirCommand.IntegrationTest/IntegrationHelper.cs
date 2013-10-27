@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace DirCommand.IntegrationTest
 {
@@ -12,7 +13,7 @@ namespace DirCommand.IntegrationTest
          string tempPath = Path.GetTempPath();
          string testDirectory = Path.Combine( tempPath, _testDirectoryName );
          string runDirectory = GetRunDirectoryName() + GetNextIndex( testDirectory );
-         
+
          string finalPath = Path.Combine( tempPath, _testDirectoryName, runDirectory );
 
          Directory.CreateDirectory( finalPath );
@@ -68,13 +69,21 @@ namespace DirCommand.IntegrationTest
          }
       }
 
-      public static string CreateTempFile( string tempDirectory )
+      public static string CreateTempFile( string tempDirectory, int length = 0 )
       {
          string fileName = "TempFile_" + Guid.NewGuid();
 
          string fullPath = Path.Combine( tempDirectory, fileName );
 
-         File.Create( fullPath ).Close();
+         using ( var fileStream = File.Create( fullPath ) )
+         {
+            if ( length != 0 )
+            {
+               byte[] bytes = Enumerable.Repeat( (byte) '#', length ).ToArray();
+
+               fileStream.Write( bytes, 0, bytes.Length );
+            }
+         }
 
          return fileName;
       }

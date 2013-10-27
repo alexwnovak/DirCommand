@@ -65,5 +65,26 @@ namespace DirCommand.IntegrationTest
          Assert.AreEqual( subDirectory, files.First().FullName );
          Assert.AreEqual( fileName, files.ElementAt( 1 ).FullName );
       }
+
+      [TestMethod]
+      public void GetFiles_DirectoryHasOneFile_ReturnsFileSize()
+      {
+         const int fileSize = 12;
+
+         // Setup
+
+         string tempDirectory = IntegrationHelper.CreateTempDirectory();
+         IntegrationHelper.CreateTempFile( tempDirectory, fileSize );
+
+         // Test
+
+         var fileSystem = new FileSystem();
+
+         var files = fileSystem.GetFiles( tempDirectory );
+
+         // Assert
+
+         Assert.AreEqual( fileSize, files[0].Length );
+      }
    }
 }

@@ -22,6 +22,12 @@ namespace DirCommand.UnitTest
          var fileSystemMock = new Mock<IFileSystem>();
          Dependency.RegisterInstance( fileSystemMock.Object );
 
+         var consoleAdapterMock = new Mock<IConsoleAdapter>();
+         Dependency.RegisterInstance( consoleAdapterMock.Object );
+
+         var settingsRepoMock = new Mock<ISettingsRepository>();
+         Dependency.RegisterInstance( settingsRepoMock.Object );
+
          // Test
 
          var fileController = new FileController();
@@ -52,6 +58,9 @@ namespace DirCommand.UnitTest
          var consoleAdapterMock = new Mock<IConsoleAdapter>();
          Dependency.RegisterInstance( consoleAdapterMock.Object );
 
+         var settingsRepoMock = new Mock<ISettingsRepository>();
+         Dependency.RegisterInstance( settingsRepoMock.Object );
+
          // Test
 
          var fileController = new FileController();
@@ -61,7 +70,7 @@ namespace DirCommand.UnitTest
          // Assert
 
          fileSystemMock.Verify( fs => fs.GetFiles( It.IsAny<string>() ), Times.Once() );
-         consoleAdapterMock.Verify( ca => ca.WriteLine( It.IsAny<string>() ), Times.Exactly( files.Length ) );
+         consoleAdapterMock.Verify( ca => ca.WriteLine( It.IsAny<string>(), It.IsAny<ConsoleColor>() ), Times.Exactly( files.Length ) );
       }
 
       [TestMethod]

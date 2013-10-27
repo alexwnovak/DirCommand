@@ -10,6 +10,7 @@
          Dependency.RegisterType<IFileSystem, FileSystem>();
          Dependency.RegisterType<IDisplayController, DisplayController>();
          Dependency.RegisterType<IConsoleAdapter, ConsoleAdapter>();
+         Dependency.RegisterType<ISettingsRepository, SettingsRepository>();
       }
 
       private static int Main( string[] arguments )

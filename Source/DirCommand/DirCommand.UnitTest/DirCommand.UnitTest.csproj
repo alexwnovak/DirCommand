@@ -66,6 +66,7 @@
     <Compile Include="FileControllerTest.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingsRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DirCommand\DirCommand.csproj">

@@ -17,7 +17,7 @@ namespace DirCommand.UnitTest
       public void Run_ArgumentsIsNull_FileControllerRunsWithRunSettings()
       {
          var runSettings = new RunSettings();
-         
+
          // Setup
 
          var fileControllerMock = new Mock<IFileController>();
@@ -196,6 +196,31 @@ namespace DirCommand.UnitTest
          // Assert
 
          fileControllerMock.Verify( fc => fc.Run( runSettings ), Times.Once() );
+      }
+
+      [TestMethod]
+      public void Run_FileControllerFails_ReturnsExitCodeOne()
+      {
+         const int expectedExitCode = 123;
+
+         // Setup
+
+         var argumentParserMock = new Mock<IArgumentParser>();
+         Dependency.RegisterInstance( argumentParserMock.Object );
+
+         var fileControllerMock = new Mock<IFileController>();
+         fileControllerMock.Setup( fc => fc.Run( It.IsAny<RunSettings>() ) ).Throws( new AbortProgramException( expectedExitCode ) );
+         Dependency.RegisterInstance( fileControllerMock.Object );
+
+         // Test
+
+         var appController = new AppController();
+
+         int actualExitCode = appController.Run( null );
+
+         // Assert
+
+         Assert.AreEqual( expectedExitCode, actualExitCode );
       }
    }
 }

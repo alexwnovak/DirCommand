@@ -62,11 +62,43 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
+      public void GetSizeString_SizeIs9Megabytes_ReturnsCorrectString()
+      {
+         string sizeString = SizeFormatter.GetSizeString( 9123123 );
+
+         Assert.AreEqual( "  9 MB", sizeString );
+      }
+
+      [TestMethod]
+      public void GetSizeString_SizeIs55Megabytes_ReturnsCorrectString()
+      {
+         string sizeString = SizeFormatter.GetSizeString( 55000222 );
+
+         Assert.AreEqual( " 55 MB", sizeString );
+      }
+
+      [TestMethod]
       public void GetSizeString_SizeIs234Megabytes_ReturnsCorrectString()
       {
          string sizeString = SizeFormatter.GetSizeString( 234000000 );
 
          Assert.AreEqual( "234 MB", sizeString );
+      }
+
+      [TestMethod]
+      public void GetSizeString_SizeIs8Gigabytes_ReturnsCorrectString()
+      {
+         string sizeString = SizeFormatter.GetSizeString( 8123123123 );
+
+         Assert.AreEqual( "  8 GB", sizeString );
+      }
+
+      [TestMethod]
+      public void GetSizeString_SizeIs69Gigabytes_ReturnsCorrectString()
+      {
+         string sizeString = SizeFormatter.GetSizeString( 69123123123 );
+
+         Assert.AreEqual( " 69 GB", sizeString );
       }
 
       [TestMethod]
@@ -78,11 +110,43 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
+      public void GetSizeString_SizeIs7Terabytes_ReturnsCorrectString()
+      {
+         string sizeString = SizeFormatter.GetSizeString( 7000000000000 );
+
+         Assert.AreEqual( "  7 TB", sizeString );
+      }
+
+      [TestMethod]
+      public void GetSizeString_SizeIs44Terabytes_ReturnsCorrectString()
+      {
+         string sizeString = SizeFormatter.GetSizeString( 44000000000000 );
+
+         Assert.AreEqual( " 44 TB", sizeString );
+      }
+
+      [TestMethod]
       public void GetSizeString_SizeIs456Terabytes_ReturnsCorrectString()
       {
          string sizeString = SizeFormatter.GetSizeString( 456000000000000 );
 
          Assert.AreEqual( "456 TB", sizeString );
+      }
+
+      [TestMethod]
+      public void GetSizeString_SizeIs1Petabyte_ReturnsCorrectString()
+      {
+         string sizeString = SizeFormatter.GetSizeString( 1000000000000000 );
+
+         Assert.AreEqual( "  1 PB", sizeString );         
+      }
+
+      [TestMethod]
+      public void GetSizeString_SizeIs42Petabytes_ReturnsCorrectString()
+      {
+         string sizeString = SizeFormatter.GetSizeString( 42000000000000001 );
+
+         Assert.AreEqual( " 42 PB", sizeString );
       }
 
       [TestMethod]

@@ -38,6 +38,22 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
+      public void GetSizeString_SizeIs5Kilobytes_ReturnsCorrectStringAndTruncatesDigits()
+      {
+         string sizeString = SizeFormatter.GetSizeString( 5123 );
+
+         Assert.AreEqual( "  5 KB", sizeString );
+      }
+
+      [TestMethod]
+      public void GetSizeString_SizeIs23Kilobytes_ReturnsCorrectStringAndTruncatesDigits()
+      {
+         string sizeString = SizeFormatter.GetSizeString( 23567 );
+
+         Assert.AreEqual( " 23 KB", sizeString );
+      }
+
+      [TestMethod]
       public void GetSizeString_SizeIs123Kilobytes_ReturnsCorrectString()
       {
          string sizeString = SizeFormatter.GetSizeString( 123000 );

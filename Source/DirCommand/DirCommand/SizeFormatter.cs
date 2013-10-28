@@ -1,60 +1,48 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DirCommand
 {
    public static class SizeFormatter
    {
-      private const long _kilobytes = 1000;
-      private const long _megabytes = 1000000;
-      private const long _gigabytes = 1000000000;
-      private const long _terabytes = 1000000000000;
-      private const long _petabytes = 1000000000000000;
-      private const long _exabytes = 1000000000000000000;
+      private static readonly List<Tuple<long, string>> _metricGroups = GetMetricGroups();
+
+      private static List<Tuple<long, string>> GetMetricGroups()
+      {
+         var metricGroups = new List<Tuple<long, string>>
+         {
+            new Tuple<long, string>( 1000000000000000000, "EB" ),
+            new Tuple<long, string>( 1000000000000000, "PB" ),
+            new Tuple<long, string>( 1000000000000, "TB" ),
+            new Tuple<long, string>( 1000000000, "GB" ),
+            new Tuple<long, string>( 1000000, "MB" ),
+            new Tuple<long, string>( 1000, "KB" ),
+            new Tuple<long, string>( 1, "B " )
+         };
+
+         return metricGroups;
+      }
 
       public static string GetSizeString( long bytes )
       {
-         string sizeString;
-         string postfix;
-
          if ( bytes < 0 )
          {
             throw new ArgumentException( "Size in bytes must not be negative" );
          }
 
-         if ( bytes >= _exabytes )
+         string sizeString = "  0";
+         string postfix = "B ";
+
+         foreach ( var tuple in _metricGroups )
          {
-            sizeString = GetPaddedIntegerString( bytes / _exabytes );
-            postfix = "EB";
-         }
-         else if ( bytes >= _petabytes )
-         {
-            sizeString = GetPaddedIntegerString( bytes / _petabytes );
-            postfix = "PB";
-         }
-         else if ( bytes >= _terabytes )
-         {
-            sizeString = GetPaddedIntegerString( bytes / _terabytes );
-            postfix = "TB";
-         }
-         else if ( bytes >= _gigabytes )
-         {
-            sizeString = GetPaddedIntegerString( bytes / _gigabytes );
-            postfix = "GB";
-         }
-         else if ( bytes >= _megabytes )
-         {
-            sizeString = GetPaddedIntegerString( bytes / _megabytes );
-            postfix = "MB";
-         }
-         else if ( bytes >= _kilobytes )
-         {
-            sizeString = GetPaddedIntegerString( bytes / _kilobytes );
-            postfix = "KB";
-         }
-         else
-         {
-            sizeString = GetPaddedIntegerString( bytes );
-            postfix = "B ";
+            if ( bytes >= tuple.Item1 )
+            {
+               sizeString = GetPaddedIntegerString( bytes / tuple.Item1 );
+
+               postfix = tuple.Item2;
+
+               break;
+            }
          }
 
          return string.Format( "{0} {1}", sizeString, postfix );

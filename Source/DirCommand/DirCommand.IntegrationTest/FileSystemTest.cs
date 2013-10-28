@@ -14,12 +14,13 @@ namespace DirCommand.IntegrationTest
       }
 
       [TestMethod]
+      [TestCategory( "Integration" )]
       public void GetFiles_DirectoryIsEmpty_ReturnsZeroFiles()
       {
          // Setup
 
          string tempDirectory = IntegrationHelper.CreateTempDirectory();
-         
+
          // Test
 
          var fileSystem = new FileSystem();
@@ -30,6 +31,7 @@ namespace DirCommand.IntegrationTest
       }
 
       [TestMethod]
+      [TestCategory( "Integration" )]
       public void GetFiles_DirectoryHasOneFile_ReturnsTheOneFile()
       {
          // Setup
@@ -48,6 +50,7 @@ namespace DirCommand.IntegrationTest
       }
 
       [TestMethod]
+      [TestCategory( "Integration" )]
       public void GetFiles_DirectoryHasOneFileAndOneSubDirectory_ReturnsAll()
       {
          // Setup
@@ -71,6 +74,7 @@ namespace DirCommand.IntegrationTest
       }
 
       [TestMethod]
+      [TestCategory( "Integration" )]
       public void GetFiles_DirectoryHasOneFile_ReturnsFileSize()
       {
          const int fileSize = 12;

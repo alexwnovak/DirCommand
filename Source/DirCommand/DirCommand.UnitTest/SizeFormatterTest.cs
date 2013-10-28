@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DirCommand.UnitTest
 {
@@ -11,6 +12,13 @@ namespace DirCommand.UnitTest
          string sizeString = SizeFormatter.GetSizeString( 0 );
 
          Assert.AreEqual( sizeString, "  0 B " );
+      }
+
+      [TestMethod]
+      [ExpectedException( typeof( ArgumentException ) )]
+      public void GetSizeString_PassesNegativeSize_ThrowsArgumentException()
+      {
+         SizeFormatter.GetSizeString( -1 );
       }
    }
 }

@@ -60,5 +60,13 @@ namespace DirCommand.UnitTest
 
          Assert.AreEqual( "567 PB", sizeString );
       }
+
+      [TestMethod]
+      public void GetSizeString_SizeIs9Exabytes_ReturnsCorrectString()
+      {
+         string sizeString = SizeFormatter.GetSizeString( 9000000000000000000 );
+
+         Assert.AreEqual( "  9 EB", sizeString );
+      }
    }
 }

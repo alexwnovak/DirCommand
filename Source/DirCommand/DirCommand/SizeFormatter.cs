@@ -9,12 +9,24 @@ namespace DirCommand
       private const long _gigabytes = 1000000000;
       private const long _terabytes = 1000000000000;
       private const long _petabytes = 1000000000000000;
+      private const long _exabytes = 1000000000000000000;
 
       public static string GetSizeString( long bytes )
       {
+         string sizeString;
+
          if ( bytes < 0 )
          {
             throw new ArgumentException( "Size in bytes must not be negative" );
+         }
+
+         if ( bytes >= _exabytes )
+         {
+            sizeString = (bytes / _exabytes).ToString();
+            
+            sizeString = sizeString.PadLeft( 4 - sizeString.Length );
+
+            return sizeString + " EB";
          }
 
          if ( bytes >= _petabytes )

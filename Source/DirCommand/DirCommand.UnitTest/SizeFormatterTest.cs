@@ -11,7 +11,7 @@ namespace DirCommand.UnitTest
       {
          string sizeString = SizeFormatter.GetSizeString( 0 );
 
-         Assert.AreEqual( sizeString, "  0 B " );
+         Assert.AreEqual( "  0 B ", sizeString );
       }
 
       [TestMethod]
@@ -26,7 +26,15 @@ namespace DirCommand.UnitTest
       {
          string sizeString = SizeFormatter.GetSizeString( 123000 );
 
-         Assert.AreEqual( sizeString, "123 KB" );
+         Assert.AreEqual( "123 KB", sizeString );
+      }
+
+      [TestMethod]
+      public void GetSizeString_SizeIs234Megabytes_ReturnsCorrectString()
+      {
+         string sizeString = SizeFormatter.GetSizeString( 234000000 );
+
+         Assert.AreEqual( "234 MB", sizeString );
       }
    }
 }

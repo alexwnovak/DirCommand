@@ -20,5 +20,13 @@ namespace DirCommand.UnitTest
       {
          SizeFormatter.GetSizeString( -1 );
       }
+
+      [TestMethod]
+      public void GetSizeString_SizeIs123Kilobytes_ReturnsCorrectString()
+      {
+         string sizeString = SizeFormatter.GetSizeString( 123000 );
+
+         Assert.AreEqual( sizeString, "123 KB" );
+      }
    }
 }

@@ -54,7 +54,14 @@ namespace DirCommand
             return bytes / _kilobytes + " KB";
          }
 
-         return "  0 B ";
+         return GetPaddedIntegerString( bytes ) + " B ";
+      }
+
+      private static string GetPaddedIntegerString( long integer )
+      {
+         string integerString = integer.ToString();
+
+         return integerString.PadLeft( 3 );
       }
    }
 }

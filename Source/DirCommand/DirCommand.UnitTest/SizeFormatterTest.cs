@@ -15,6 +15,22 @@ namespace DirCommand.UnitTest
       }
 
       [TestMethod]
+      public void GetSizeString_SizeIs15Bytes_ReturnsCorrectString()
+      {
+         string sizeString = SizeFormatter.GetSizeString( 15 );
+
+         Assert.AreEqual( " 15 B ", sizeString );
+      }
+
+      [TestMethod]
+      public void GetSizeString_SizeIs290Bytes_ReturnsCorrectString()
+      {
+         string sizeString = SizeFormatter.GetSizeString( 290 );
+
+         Assert.AreEqual( "290 B ", sizeString );
+      }
+
+      [TestMethod]
       [ExpectedException( typeof( ArgumentException ) )]
       public void GetSizeString_PassesNegativeSize_ThrowsArgumentException()
       {

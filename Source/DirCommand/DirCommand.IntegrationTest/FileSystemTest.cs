@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DirCommand.IntegrationTest
@@ -55,6 +56,9 @@ namespace DirCommand.IntegrationTest
          string subDirectory = IntegrationHelper.CreateSubDirectory( tempDirectory );
          string fileName = IntegrationHelper.CreateTempFile( tempDirectory );
 
+         string fullDirectoryPath = Path.Combine( tempDirectory, subDirectory );
+         string fullPath = Path.Combine( tempDirectory, subDirectory, fileName );
+
          // Test
 
          var fileSystem = new FileSystem();
@@ -62,8 +66,8 @@ namespace DirCommand.IntegrationTest
          var files = fileSystem.GetFiles( tempDirectory );
 
          Assert.AreEqual( 2, files.Count() );
-         Assert.AreEqual( subDirectory, files.First().FullName );
-         Assert.AreEqual( fileName, files.ElementAt( 1 ).FullName );
+         Assert.AreEqual( fullDirectoryPath, files.First().FullName );
+         Assert.AreEqual( fullPath, files.ElementAt( 1 ).FullName );
       }
 
       [TestMethod]

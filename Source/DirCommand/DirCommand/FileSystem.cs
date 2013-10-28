@@ -17,9 +17,19 @@ namespace DirCommand
 
          var directories = Directory.GetDirectories( path );
 
+         foreach ( var directory in directories )
+         {
+            var fileEntry = new FileEntry
+            {
+               FullName = directory
+            };
+
+            fileEntries.Add( fileEntry );
+         }
+
          var files = Directory.GetFiles( path );
 
-         foreach ( var file in directories.Concat( files ) )
+         foreach ( var file in files )
          {
             var fileInfo = new FileInfo( file );
 

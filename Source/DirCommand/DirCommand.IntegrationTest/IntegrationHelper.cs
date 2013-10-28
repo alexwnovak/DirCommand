@@ -85,7 +85,7 @@ namespace DirCommand.IntegrationTest
             }
          }
 
-         return fileName;
+         return fullPath;
       }
    }
 }

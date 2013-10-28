@@ -25,7 +25,7 @@ namespace DirCommand
 
             ConsoleColor color = settingsRepository.GetExtensionColor( extension );
 
-            consoleAdapter.WriteLine( file.FullName, color );
+            consoleAdapter.WriteLine( Path.GetFileName( file.FullName ), color );
          }
       }
    }

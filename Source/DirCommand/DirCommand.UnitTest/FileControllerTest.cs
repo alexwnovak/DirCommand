@@ -145,6 +145,8 @@ namespace DirCommand.UnitTest
             Length = 123456789
          };
 
+         string expectedLengthString = SizeFormatter.GetSizeString( fileEntry.Length ) + " ";
+
          // Setup
 
          var fileSystemMock = new Mock<IFileSystem>();
@@ -165,7 +167,7 @@ namespace DirCommand.UnitTest
 
          // Assert
 
-         consoleAdapterMock.Verify( ca => ca.Write( fileEntry.Length ), Times.Once() );
+         consoleAdapterMock.Verify( ca => ca.Write( expectedLengthString ), Times.Once() );
       }
    }
 }

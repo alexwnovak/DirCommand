@@ -38,7 +38,9 @@ namespace DirCommand
 
          foreach ( var file in files )
          {
-            consoleAdapter.Write( file.Length );
+            string sizeString = SizeFormatter.GetSizeString( file.Length );
+
+            consoleAdapter.Write( sizeString + " " );
 
             string extension = Path.GetExtension( file.FullName ).ToLower();
 

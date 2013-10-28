@@ -44,5 +44,13 @@ namespace DirCommand.UnitTest
 
          Assert.AreEqual( "345 GB", sizeString );
       }
+
+      [TestMethod]
+      public void GetSizeString_SizeIs456Terabytes_ReturnsCorrectString()
+      {
+         string sizeString = SizeFormatter.GetSizeString( 456000000000000 );
+
+         Assert.AreEqual( "456 TB", sizeString );
+      }
    }
 }

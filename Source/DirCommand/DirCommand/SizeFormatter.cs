@@ -14,6 +14,7 @@ namespace DirCommand
       public static string GetSizeString( long bytes )
       {
          string sizeString;
+         string postfix;
 
          if ( bytes < 0 )
          {
@@ -22,39 +23,41 @@ namespace DirCommand
 
          if ( bytes >= _exabytes )
          {
-            sizeString = (bytes / _exabytes).ToString();
-            
-            sizeString = sizeString.PadLeft( 4 - sizeString.Length );
-
-            return sizeString + " EB";
+            sizeString = GetPaddedIntegerString( bytes / _exabytes );
+            postfix = "EB";
          }
-
-         if ( bytes >= _petabytes )
+         else if ( bytes >= _petabytes )
          {
-            return bytes / _petabytes + " PB";
+            sizeString = GetPaddedIntegerString( bytes / _petabytes );
+            postfix = "PB";
+         }
+         else if ( bytes >= _terabytes )
+         {
+            sizeString = GetPaddedIntegerString( bytes / _terabytes );
+            postfix = "TB";
+         }
+         else if ( bytes >= _gigabytes )
+         {
+            sizeString = GetPaddedIntegerString( bytes / _gigabytes );
+            postfix = "GB";
+         }
+         else if ( bytes >= _megabytes )
+         {
+            sizeString = GetPaddedIntegerString( bytes / _megabytes );
+            postfix = "MB";
+         }
+         else if ( bytes >= _kilobytes )
+         {
+            sizeString = GetPaddedIntegerString( bytes / _kilobytes );
+            postfix = "KB";
+         }
+         else
+         {
+            sizeString = GetPaddedIntegerString( bytes );
+            postfix = "B ";
          }
 
-         if ( bytes >= _terabytes )
-         {
-            return bytes / _terabytes + " TB";
-         }
-
-         if ( bytes >= _gigabytes )
-         {
-            return bytes / _gigabytes + " GB";
-         }
-
-         if ( bytes >= _megabytes )
-         {
-            return bytes / _megabytes + " MB";
-         }
-         
-         if ( bytes >= _kilobytes )
-         {
-            return bytes / _kilobytes + " KB";
-         }
-
-         return GetPaddedIntegerString( bytes ) + " B ";
+         return string.Format( "{0} {1}", sizeString, postfix );
       }
 
       private static string GetPaddedIntegerString( long integer )

@@ -7,6 +7,13 @@ namespace DirCommand.UnitTest
    public class SizeFormatterTest
    {
       [TestMethod]
+      [ExpectedException( typeof( ArgumentException ) )]
+      public void GetSizeString_PassesNegativeSize_ThrowsArgumentException()
+      {
+         SizeFormatter.GetSizeString( -1 );
+      }
+
+      [TestMethod]
       public void GetSizeString_PassesZero_ReturnsCorrectString()
       {
          string sizeString = SizeFormatter.GetSizeString( 0 );
@@ -28,13 +35,6 @@ namespace DirCommand.UnitTest
          string sizeString = SizeFormatter.GetSizeString( 290 );
 
          Assert.AreEqual( "290 B ", sizeString );
-      }
-
-      [TestMethod]
-      [ExpectedException( typeof( ArgumentException ) )]
-      public void GetSizeString_PassesNegativeSize_ThrowsArgumentException()
-      {
-         SizeFormatter.GetSizeString( -1 );
       }
 
       [TestMethod]

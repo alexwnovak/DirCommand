@@ -5,7 +5,7 @@ namespace DirCommand
 {
    public class DisplayController : IDisplayController
    {
-      public void Display( FileEntry[] files )
+      public void Display( RunSettings runSettings, FileEntry[] files )
       {
          //var settingsRepository = Dependency.Resolve<ISettingsRepository>();
 

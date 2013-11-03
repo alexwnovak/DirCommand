@@ -13,7 +13,7 @@ namespace DirCommand
 
          var displayController = Dependency.Resolve<IDisplayController>();
 
-         displayController.Display( files );
+         displayController.Display( runSettings, files );
       }
    }
 }

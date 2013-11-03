@@ -58,7 +58,7 @@ namespace DirCommand.UnitTest
          // Assert
 
          fileSystemMock.Verify( fs => fs.GetFiles( It.IsAny<string>() ), Times.Once() );
-         displayControllerMock.Verify( dc => dc.Display( files ), Times.Once() );
+         displayControllerMock.Verify( dc => dc.Display( It.IsAny<RunSettings>(), files ), Times.Once() );
       }
    }
 }

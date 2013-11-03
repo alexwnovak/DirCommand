@@ -7,22 +7,22 @@ namespace DirCommand
    {
       public void Display( RunSettings runSettings, FileEntry[] files )
       {
-         //var settingsRepository = Dependency.Resolve<ISettingsRepository>();
+         var settingsRepository = Dependency.Resolve<ISettingsRepository>();
 
-         //var consoleAdapter = Dependency.Resolve<IConsoleAdapter>();
+         var consoleAdapter = Dependency.Resolve<IConsoleAdapter>();
 
-         //foreach ( var file in files )
-         //{
-         //   string sizeString = SizeFormatter.GetSizeString( file.Length );
+         foreach ( var file in files )
+         {
+            string sizeString = SizeFormatter.GetSizeString( file.Length );
 
-         //   consoleAdapter.Write( sizeString + " " );
+            consoleAdapter.Write( sizeString + " " );
 
-         //   string extension = Path.GetExtension( file.FullName ).ToLower();
+            string extension = Path.GetExtension( file.FullName ).ToLower();
 
-         //   ConsoleColor color = settingsRepository.GetExtensionColor( extension );
+            ConsoleColor color = settingsRepository.GetExtensionColor( extension );
 
-         //   consoleAdapter.WriteLine( Path.GetFileName( file.FullName ), color );
-         //}
+            consoleAdapter.WriteLine( Path.GetFileName( file.FullName ), color );
+         }
       }
 
       public void ShowError( string message )

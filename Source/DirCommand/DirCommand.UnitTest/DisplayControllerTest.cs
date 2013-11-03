@@ -1,104 +1,100 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace DirCommand.UnitTest
 {
    [TestClass]
    public class DisplayControllerTest
    {
-      //[TestMethod]
-      //public void Run_PathContainsExecutable_DisplaysExecutableWithColor()
-      //{
-      //   const ConsoleColor exeColor = ConsoleColor.Green;
-      //   const string fileName = "SomeExecutable.exe";
-      //   var fileEntries = TestHelper.GetFileEntries( fileName );
+      [TestInitialize]
+      public void Initialize()
+      {
+         Dependency.CreateUnityContainer();
+      }
 
-      //   // Setup
+      [TestMethod]
+      public void Display_FileIsExecutable_DisplaysExecutableWithColor()
+      {
+         const ConsoleColor exeColor = ConsoleColor.Green;
+         const string fileName = "SomeExecutable.exe";
+         var fileEntries = TestHelper.GetFileEntries( fileName );
 
-      //   var fileSystemMock = new Mock<IFileSystem>();
-      //   fileSystemMock.Setup( fs => fs.GetFiles( It.IsAny<string>() ) ).Returns( fileEntries );
-      //   Dependency.RegisterInstance( fileSystemMock.Object );
+         // Setup
 
-      //   var consoleAdapterMock = new Mock<IConsoleAdapter>();
-      //   Dependency.RegisterInstance( consoleAdapterMock.Object );
+         var consoleAdapterMock = new Mock<IConsoleAdapter>();
+         Dependency.RegisterInstance( consoleAdapterMock.Object );
 
-      //   var settingsRepoMock = new Mock<ISettingsRepository>();
-      //   settingsRepoMock.Setup( sr => sr.GetExtensionColor( ".exe" ) ).Returns( exeColor );
-      //   Dependency.RegisterInstance( settingsRepoMock.Object );
+         var settingsRepoMock = new Mock<ISettingsRepository>();
+         settingsRepoMock.Setup( sr => sr.GetExtensionColor( ".exe" ) ).Returns( exeColor );
+         Dependency.RegisterInstance( settingsRepoMock.Object );
 
-      //   // Test
+         // Test
 
-      //   var fileController = new FileController();
+         var displayController = new DisplayController();
 
-      //   fileController.Run( new RunSettings() );
+         displayController.Display( new RunSettings(), fileEntries );
 
-      //   // Assert
+         // Assert
 
-      //   consoleAdapterMock.Verify( ca => ca.WriteLine( fileName, ConsoleColor.Green ), Times.Once() );
-      //}
+         consoleAdapterMock.Verify( ca => ca.WriteLine( fileName, ConsoleColor.Green ), Times.Once() );
+      }
 
-      //[TestMethod]
-      //public void Run_PathContainsUppercaseFile_DisplaysProperColor()
-      //{
-      //   const ConsoleColor exeColor = ConsoleColor.Green;
-      //   const string fileName = "SomeExecutable.EXE";
-      //   var fileEntries = TestHelper.GetFileEntries( fileName );
+      [TestMethod]
+      public void Run_PathContainsUppercaseFile_DisplaysProperColor()
+      {
+         const ConsoleColor exeColor = ConsoleColor.Green;
+         const string fileName = "SomeExecutable.EXE";
+         var fileEntries = TestHelper.GetFileEntries( fileName );
 
-      //   // Setup
+         // Setup
 
-      //   var fileSystemMock = new Mock<IFileSystem>();
-      //   fileSystemMock.Setup( fs => fs.GetFiles( It.IsAny<string>() ) ).Returns( fileEntries );
-      //   Dependency.RegisterInstance( fileSystemMock.Object );
+         var consoleAdapterMock = new Mock<IConsoleAdapter>();
+         Dependency.RegisterInstance( consoleAdapterMock.Object );
 
-      //   var consoleAdapterMock = new Mock<IConsoleAdapter>();
-      //   Dependency.RegisterInstance( consoleAdapterMock.Object );
+         var settingsRepoMock = new Mock<ISettingsRepository>();
+         settingsRepoMock.Setup( sr => sr.GetExtensionColor( ".exe" ) ).Returns( exeColor );
+         Dependency.RegisterInstance( settingsRepoMock.Object );
 
-      //   var settingsRepoMock = new Mock<ISettingsRepository>();
-      //   settingsRepoMock.Setup( sr => sr.GetExtensionColor( ".exe" ) ).Returns( exeColor );
-      //   Dependency.RegisterInstance( settingsRepoMock.Object );
+         // Test
 
-      //   // Test
+         var displayController = new DisplayController();
 
-      //   var fileController = new FileController();
+         displayController.Display( new RunSettings(), fileEntries );
 
-      //   fileController.Run( new RunSettings() );
+         // Assert
 
-      //   // Assert
+         consoleAdapterMock.Verify( ca => ca.WriteLine( fileName, ConsoleColor.Green ), Times.Once() );
+      }
 
-      //   consoleAdapterMock.Verify( ca => ca.WriteLine( fileName, ConsoleColor.Green ), Times.Once() );
-      //}
+      [TestMethod]
+      public void Run_HasFileLength_LengthIsWrittenToConsole()
+      {
+         var fileEntry = new FileEntry
+         {
+            FullName = "SomeFile.txt",
+            Length = 123456789
+         };
 
-      //[TestMethod]
-      //public void Run_HasFileLength_LengthIsWrittenToConsole()
-      //{
-      //   var fileEntry = new FileEntry
-      //   {
-      //      FullName = "SomeFile.txt",
-      //      Length = 123456789
-      //   };
+         string expectedLengthString = SizeFormatter.GetSizeString( fileEntry.Length ) + " ";
 
-      //   string expectedLengthString = SizeFormatter.GetSizeString( fileEntry.Length ) + " ";
+         // Setup
 
-      //   // Setup
+         var settingsRepoMock = new Mock<ISettingsRepository>();
+         Dependency.RegisterInstance( settingsRepoMock.Object );
 
-      //   var fileSystemMock = new Mock<IFileSystem>();
-      //   fileSystemMock.Setup( fs => fs.GetFiles( It.IsAny<string>() ) ).Returns( fileEntry.AsArray() );
-      //   Dependency.RegisterInstance( fileSystemMock.Object );
+         var consoleAdapterMock = new Mock<IConsoleAdapter>();
+         Dependency.RegisterInstance( consoleAdapterMock.Object );
 
-      //   var settingsRepoMock = new Mock<ISettingsRepository>();
-      //   Dependency.RegisterInstance( settingsRepoMock.Object );
+         // Test
 
-      //   var consoleAdapterMock = new Mock<IConsoleAdapter>();
-      //   Dependency.RegisterInstance( consoleAdapterMock.Object );
+         var displayController = new DisplayController();
 
-      //   // Test
+         displayController.Display( new RunSettings(), fileEntry.AsArray() );
 
-      //   var fileController = new FileController();
+         // Assert
 
-      //   fileController.Run( new RunSettings() );
-
-      //   // Assert
-
-      //   consoleAdapterMock.Verify( ca => ca.Write( expectedLengthString ), Times.Once() );
-      //}
+         consoleAdapterMock.Verify( ca => ca.Write( expectedLengthString ), Times.Once() );
+      }
    }
 }

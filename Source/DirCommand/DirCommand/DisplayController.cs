@@ -13,15 +13,24 @@ namespace DirCommand
 
          foreach ( var file in files )
          {
-            string sizeString = SizeFormatter.GetSizeString( file.Length );
+            if ( file.IsDirectory )
+            {
+               string output = string.Format( "Folder {0}", Path.GetFileName( file.FullName ) );
 
-            consoleAdapter.Write( sizeString + " " );
+               consoleAdapter.WriteLine( output );
+            }
+            else
+            {
+               string sizeString = SizeFormatter.GetSizeString( file.Length );
 
-            string extension = Path.GetExtension( file.FullName ).ToLower();
+               consoleAdapter.Write( sizeString + " " );
 
-            ConsoleColor color = settingsRepository.GetExtensionColor( extension );
+               string extension = Path.GetExtension( file.FullName ).ToLower();
 
-            consoleAdapter.WriteLine( Path.GetFileName( file.FullName ), color );
+               ConsoleColor color = settingsRepository.GetExtensionColor( extension );
+
+               consoleAdapter.WriteLine( Path.GetFileName( file.FullName ), color );               
+            }
          }
       }
 

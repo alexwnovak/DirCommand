@@ -96,5 +96,37 @@ namespace DirCommand.UnitTest
 
          consoleAdapterMock.Verify( ca => ca.Write( expectedLengthString ), Times.Once() );
       }
+
+      [TestMethod]
+      public void Run_ContainsDirectory_DisplaysDirectoryCorrectly()
+      {
+         var fileEntry = new FileEntry
+         {
+            FullName = "ThisDirectory",
+            IsDirectory = true
+         };
+
+         string actualString = string.Empty;
+
+         // Setup
+
+         var settingsRepoMock = new Mock<ISettingsRepository>();
+         Dependency.RegisterInstance( settingsRepoMock.Object );
+
+         var consoleAdapterMock = new Mock<IConsoleAdapter>();
+         consoleAdapterMock.Setup( ca => ca.WriteLine( It.IsAny<string>() ) ).Callback<string>( s => actualString = s.ToString() );
+         Dependency.RegisterInstance( consoleAdapterMock.Object );
+
+         // Test
+
+         var displayController = new DisplayController();
+
+         displayController.Display( new RunSettings(), fileEntry.AsArray() );
+
+         // Assert
+
+         Assert.IsTrue( actualString.StartsWith( "Folder" ) );
+         Assert.IsTrue( actualString.EndsWith( fileEntry.FullName ) );
+      }
    }
 }

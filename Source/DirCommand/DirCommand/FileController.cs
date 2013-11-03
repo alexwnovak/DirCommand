@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-
-namespace DirCommand
+﻿namespace DirCommand
 {
    public class FileController : IFileController
    {

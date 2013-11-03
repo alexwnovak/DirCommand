@@ -11,22 +11,9 @@ namespace DirCommand
 
          var files = fileSystem.GetFiles( runSettings.Path );
 
-         var settingsRepository = Dependency.Resolve<ISettingsRepository>();
+         var displayController = Dependency.Resolve<IDisplayController>();
 
-         var consoleAdapter = Dependency.Resolve<IConsoleAdapter>();
-
-         foreach ( var file in files )
-         {
-            string sizeString = SizeFormatter.GetSizeString( file.Length );
-
-            consoleAdapter.Write( sizeString + " " );
-
-            string extension = Path.GetExtension( file.FullName ).ToLower();
-
-            ConsoleColor color = settingsRepository.GetExtensionColor( extension );
-
-            consoleAdapter.WriteLine( Path.GetFileName( file.FullName ), color );
-         }
+         displayController.Display( files );
       }
    }
 }

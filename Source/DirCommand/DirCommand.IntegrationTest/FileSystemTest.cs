@@ -94,5 +94,28 @@ namespace DirCommand.IntegrationTest
 
          Assert.AreEqual( fileSize, files[0].Length );
       }
+
+      [TestMethod]
+      public void GetFiles_HasDirectory_ReturnsDirectoryFlagSet()
+      {
+         // Setup
+
+         string tempDirectory = IntegrationHelper.CreateTempDirectory();
+         const string subDirectory = "OneSubDirectory";
+         string fullPath = Path.Combine( tempDirectory, subDirectory );
+         Directory.CreateDirectory( fullPath );
+
+         // Test
+
+         var fileSystem = new FileSystem();
+
+         var files = fileSystem.GetFiles( tempDirectory );
+
+         // Assert
+
+         Assert.AreEqual( 1, files.Length );
+         Assert.AreEqual( fullPath, files[0].FullName );
+         Assert.IsTrue( files[0].IsDirectory );
+      }
    }
 }

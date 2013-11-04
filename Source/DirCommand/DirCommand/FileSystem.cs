@@ -20,7 +20,8 @@ namespace DirCommand
          {
             var fileEntry = new FileEntry
             {
-               FullName = directory
+               FullName = directory,
+               IsDirectory = true
             };
 
             fileEntries.Add( fileEntry );

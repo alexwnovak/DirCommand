@@ -15,9 +15,9 @@ namespace DirCommand
          {
             if ( file.IsDirectory )
             {
-               string output = string.Format( "Folder {0}", Path.GetFileName( file.FullName ) );
+               consoleAdapter.Write( "Folder " );
 
-               consoleAdapter.WriteLine( output );
+               consoleAdapter.WriteLine( Path.GetFileName( file.FullName )  );
             }
             else
             {

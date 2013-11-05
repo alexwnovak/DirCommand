@@ -114,7 +114,7 @@ namespace DirCommand.UnitTest
          Dependency.RegisterInstance( settingsRepoMock.Object );
 
          var consoleAdapterMock = new Mock<IConsoleAdapter>();
-         consoleAdapterMock.Setup( ca => ca.WriteLine( It.IsAny<string>() ) ).Callback<string>( s => actualString = s.ToString() );
+         consoleAdapterMock.Setup( ca => ca.Write( It.IsAny<object>() ) ).Callback<object>( s => actualString = s.ToString() );
          Dependency.RegisterInstance( consoleAdapterMock.Object );
 
          // Test
@@ -126,7 +126,6 @@ namespace DirCommand.UnitTest
          // Assert
 
          Assert.IsTrue( actualString.StartsWith( "Folder" ) );
-         Assert.IsTrue( actualString.EndsWith( fileEntry.FullName ) );
       }
    }
 }

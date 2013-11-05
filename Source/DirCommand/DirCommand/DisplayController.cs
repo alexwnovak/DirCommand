@@ -15,7 +15,9 @@ namespace DirCommand
          {
             if ( file.IsDirectory )
             {
-               consoleAdapter.Write( "Folder " );
+               consoleAdapter.Write( "Folder" );
+
+               consoleAdapter.Write( " | ", ConsoleColor.DarkGray );
 
                consoleAdapter.WriteLine( Path.GetFileName( file.FullName )  );
             }
@@ -23,7 +25,9 @@ namespace DirCommand
             {
                string sizeString = SizeFormatter.GetSizeString( file.Length );
 
-               consoleAdapter.Write( sizeString + " " );
+               consoleAdapter.Write( sizeString );
+
+               consoleAdapter.Write( " | ", ConsoleColor.DarkGray );
 
                string extension = Path.GetExtension( file.FullName ).ToLower();
 

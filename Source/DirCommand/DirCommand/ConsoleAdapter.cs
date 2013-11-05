@@ -9,6 +9,17 @@ namespace DirCommand
          Console.Write( obj.ToString() );
       }
 
+      public void Write( object obj, ConsoleColor foregroundColor )
+      {
+         var oldForegroundColor = Console.ForegroundColor;
+
+         Console.ForegroundColor = foregroundColor;
+
+         Console.Write( obj.ToString() );
+
+         Console.ForegroundColor = oldForegroundColor;
+      }
+
       public void WriteLine( string text )
       {
          Console.WriteLine( text );

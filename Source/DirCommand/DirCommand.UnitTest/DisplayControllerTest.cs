@@ -76,7 +76,7 @@ namespace DirCommand.UnitTest
             Length = 123456789
          };
 
-         string expectedLengthString = SizeFormatter.GetSizeString( fileEntry.Length ) + " ";
+         string expectedLengthString = SizeFormatter.GetSizeString( fileEntry.Length );
 
          // Setup
 

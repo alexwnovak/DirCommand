@@ -4,6 +4,11 @@ namespace DirCommand
 {
    public class ConsoleAdapter : IConsoleAdapter
    {
+      public int GetWindowWidth()
+      {
+         return Console.WindowWidth;
+      }
+
       public void Write( object obj )
       {
          Console.Write( obj.ToString() );

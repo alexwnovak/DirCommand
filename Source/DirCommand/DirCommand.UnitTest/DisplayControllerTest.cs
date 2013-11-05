@@ -114,7 +114,7 @@ namespace DirCommand.UnitTest
          Dependency.RegisterInstance( settingsRepoMock.Object );
 
          var consoleAdapterMock = new Mock<IConsoleAdapter>();
-         consoleAdapterMock.Setup( ca => ca.Write( It.IsAny<object>() ) ).Callback<object>( s => actualString = s.ToString() );
+         consoleAdapterMock.Setup( ca => ca.Write( It.IsAny<object>(), ConsoleColor.Magenta ) ).Callback<object, ConsoleColor>( ( s, c ) => actualString = s.ToString() );
          Dependency.RegisterInstance( consoleAdapterMock.Object );
 
          // Test

@@ -15,11 +15,11 @@ namespace DirCommand
          {
             if ( file.IsDirectory )
             {
-               consoleAdapter.Write( "Folder" );
+               consoleAdapter.Write( "Folder", ConsoleColor.Magenta );
 
                consoleAdapter.Write( " | ", ConsoleColor.DarkGray );
 
-               consoleAdapter.WriteLine( Path.GetFileName( file.FullName )  );
+               consoleAdapter.WriteLine( Path.GetFileName( file.FullName ), ConsoleColor.Magenta );
             }
             else
             {

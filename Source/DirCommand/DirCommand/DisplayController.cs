@@ -11,31 +11,36 @@ namespace DirCommand
 
          var consoleAdapter = Dependency.Resolve<IConsoleAdapter>();
 
+         consoleAdapter.WriteLine( DisplayFrame.GetTopHeader(), ConsoleColor.DarkGray );
+
+         string fullDirectoryPath = Path.GetFullPath( runSettings.Path );
+         consoleAdapter.WriteLine( fullDirectoryPath );
+
+         consoleAdapter.WriteLine( DisplayFrame.GetBottomHeader(), ConsoleColor.DarkGray );
+
          foreach ( var file in files )
          {
             if ( file.IsDirectory )
             {
                consoleAdapter.Write( "Folder", ConsoleColor.Magenta );
 
-               consoleAdapter.Write( " | ", ConsoleColor.DarkGray );
+               consoleAdapter.Write( string.Format( " {0} ", DisplayFrame.PipeCharacter ), ConsoleColor.DarkGray );
 
-               consoleAdapter.WriteLine( Path.GetFileName( file.FullName ), ConsoleColor.Magenta );
+               consoleAdapter.Write( Path.GetFileName( file.FullName ), ConsoleColor.Magenta );
+
+               int filePaneWidth = (consoleAdapter.GetWindowWidth() - 2) / 2 - 7;
+
+               var padding = new string( ' ', filePaneWidth - file.FullName.Length );
+
+               consoleAdapter.WriteLine( padding + "| " );
             }
             else
             {
-               string sizeString = SizeFormatter.GetSizeString( file.Length );
-
-               consoleAdapter.Write( sizeString );
-
-               consoleAdapter.Write( " | ", ConsoleColor.DarkGray );
-
-               string extension = Path.GetExtension( file.FullName ).ToLower();
-
-               ConsoleColor color = settingsRepository.GetExtensionColor( extension );
-
-               consoleAdapter.WriteLine( Path.GetFileName( file.FullName ), color );               
+               DisplayFrame.WriteFile( file );
             }
          }
+
+         consoleAdapter.WriteLine( DisplayFrame.GetFooter(), ConsoleColor.DarkGray );
       }
 
       public void ShowError( string message )
